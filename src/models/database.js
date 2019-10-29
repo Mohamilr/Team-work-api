@@ -18,12 +18,12 @@ pool.on('connect', () => {})
 // user table
 const userTable = async () => {
     const userTableQuery = `CREATE TABLE IF NOT EXISTS
-    users(
+    employee(
         userId SERIAL PRIMARY KEY NOT NULL UNIQUE,
         firstName VARCHAR(50) NOT NULL,
         lastName VARCHAR(50) NOT NULL,
         email VARCHAR(50) NOT NULL,
-        password VARCHAR(50) NOT NULL,
+        password VARCHAR(200) NOT NULL,
         gender VARCHAR(20) NOT NULL,
         jobRole VARCHAR(50) NOT NULL,
         department VARCHAR(100) NOT NULL,
@@ -32,102 +32,102 @@ const userTable = async () => {
 
     try {
         await pool.query(userTableQuery);
-        console.log('user table created')
+        console.log('employee table created')
     }
     catch (e) {
         console.log(e)
     }
 };
 
-// article table
-const articleTable = async () => {
-    const articleTableQuery = `CREATE TABLE IF NOT EXISTS
-    articles(
-        articleId SERIAL PRIMARY KEY NOT NULL UNIQUE,
-        title VARCHAR(100) NOT NULL,
-        article VARCHAR(500) NOT NULL,
-        userId INT NOT NULL,
-        createdOn DATE NOT NULL,
-        FOREIGN KEY(userId) REFERENCES users(userId)  ON DELETE CASCADE ON UPDATE CASCADE
-    )`;
+// // // article table
+// const articleTable = async () => {
+//     const articleTableQuery = `CREATE TABLE IF NOT EXISTS
+//     articles(
+//         articleId SERIAL PRIMARY KEY NOT NULL UNIQUE,
+//         title VARCHAR(100) NOT NULL,
+//         article VARCHAR(500) NOT NULL,
+//         userId INT NOT NULL,
+//         createdOn DATE NOT NULL,
+//         FOREIGN KEY(userId) REFERENCES employee(userId)  ON DELETE CASCADE ON UPDATE CASCADE
+//     )`;
 
-    try{
-        await pool.query(articleTableQuery);
-        console.log('article table created');
-    }
-    catch(e) {
-        console.log(e)
-    }
-};
+//     try{
+//         await pool.query(articleTableQuery);
+//         console.log('article table created');
+//     }
+//     catch(e) {
+//         console.log(e)
+//     }
+// };
 
-//  article comment table
-const articleCommentTable = async () => {
-    const articleCommentTableQuery = `CREATE TABLE IF NOT EXISTS
-    article_comments(
-        commentId SERIAL PRIMARY KEY NOT NULL UNIQUE,
-        comment VARCHAR(200) NOT NULL,
-        createdOn DATE NOT NULL,
-        userId INTEGER NOT NULL,
-        articleId INT,
-        FOREIGN KEY(articleId) REFERENCES articles(articleId) ON UPDATE CASCADE ON DELETE CASCADE,
-        FOREIGN KEY(userId) REFERENCES users(userId) ON UPDATE CASCADE ON DELETE CASCADE
-    )`;
+// // //  article comment table
+// const articleCommentTable = async () => {
+//     const articleCommentTableQuery = `CREATE TABLE IF NOT EXISTS
+//     article_comments(
+//         commentId SERIAL PRIMARY KEY NOT NULL UNIQUE,
+//         comment VARCHAR(200) NOT NULL,
+//         createdOn DATE NOT NULL,
+//         userId INTEGER NOT NULL,
+//         articleId INT,
+//         FOREIGN KEY(articleId) REFERENCES articles(articleId) ON UPDATE CASCADE ON DELETE CASCADE,
+//         FOREIGN KEY(userId) REFERENCES employee(userId) ON UPDATE CASCADE ON DELETE CASCADE
+//     )`;
 
-    try{
-        await pool.query(articleCommentTableQuery);
-        console.log('article comment table created')
-    }
-    catch(e) {
-        console.log(e)
-    }
-};
+//     try{
+//         await pool.query(articleCommentTableQuery);
+//         console.log('article comment table created')
+//     }
+//     catch(e) {
+//         console.log(e)
+//     }
+// };
 
-// gif table
-const gifTable = async () => {
-    const gifTableQuery = `CREATE TABLE IF NOT EXISTS
-    gifs(
-        gifId SERIAL PRIMARY KEY NOT NULL UNIQUE,
-        image VARCHAR(300) NOT NULL,
-        title VARCHAR(50) NOT NULL,
-        userId INT NOT NULL,
-        createdOn DATE NOT NULL,
-        FOREIGN KEY(userId) REFERENCES users(userId) ON DELETE CASCADE ON UPDATE CASCADE
-    )`;
+// // // gif table
+// const gifTable = async () => {
+//     const gifTableQuery = `CREATE TABLE IF NOT EXISTS
+//     gifs(
+//         gifId SERIAL PRIMARY KEY NOT NULL UNIQUE,
+//         image VARCHAR(300) NOT NULL,
+//         title VARCHAR(50) NOT NULL,
+//         userId INT NOT NULL,
+//         createdOn DATE NOT NULL,
+//         FOREIGN KEY(userId) REFERENCES employee(userId) ON DELETE CASCADE ON UPDATE CASCADE
+//     )`;
 
-    try{
-        await pool.query(gifTableQuery)
-        console.log('gif table created');
-    }
-    catch(e) {
-        console.log(e)
-    }
-};
+//     try{
+//         await pool.query(gifTableQuery)
+//         console.log('gif table created');
+//     }
+//     catch(e) {
+//         console.log(e)
+//     }
+// };
 
-// gif comment table
-const gifCommentTable = async () => {
-    const gifCommentTableQuery = `CREATE TABLE IF NOT EXISTS
-    gif_comments(
-        commentId SERIAL PRIMARY KEY NOT NULL UNIQUE,
-        comment VARCHAR(200) NOT NULL,
-        createdOn DATE NOT NULL,
-        userId INTEGER,
-        gifId INT,
-        FOREIGN KEY(gifId) REFERENCES gifs(gifId) ON UPDATE CASCADE ON DELETE CASCADE,
-        FOREIGN KEY(userId) REFERENCES users(userId) 
-    )`
+// // // gif comment table
+// const gifCommentTable = async () => {
+//     const gifCommentTableQuery = `CREATE TABLE IF NOT EXISTS
+//     gif_comments(
+//         commentId SERIAL PRIMARY KEY NOT NULL UNIQUE,
+//         comment VARCHAR(200) NOT NULL,
+//         createdOn DATE NOT NULL,
+//         userId INTEGER,
+//         gifId INT,
+//         FOREIGN KEY(gifId) REFERENCES gifs(gifId) ON UPDATE CASCADE ON DELETE CASCADE,
+//         FOREIGN KEY(userId) REFERENCES employee(userId) 
+//     )`
 
-    try{
-        await pool.query(gifCommentTableQuery);
-        console.log('gif comment table created')
-    }
-    catch(e) {
-        console.log(e)
-    }
-};
+//     try{
+//         await pool.query(gifCommentTableQuery);
+//         console.log('gif comment table created')
+//     }
+//     catch(e) {
+//         console.log(e)
+//     }
+// };
 
-
+// drop table
 // const dropTable = async () => {
-//     const dropTableQuery = `DROP TABLE IF EXISTS`
+//     const dropTableQuery = `DROP TABLE IF EXISTS employee`
 //     try{
 //         await pool.query(dropTableQuery)
 //         console.log('table dropped')
@@ -140,14 +140,14 @@ const gifCommentTable = async () => {
 // user
 userTable();
 // gif
-gifTable();
+// gifTable();
 // article
-articleTable();
+// articleTable();
 // article comment
-articleCommentTable();
+// articleCommentTable();
 // gif comment
-gifCommentTable();
-// dropTable();
+// gifCommentTable();
+// dropTable
 // dropTable();
 
 
