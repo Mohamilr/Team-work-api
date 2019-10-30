@@ -36,7 +36,7 @@ const articleController = {
                         message: 'Article successfully posted',
                         articleId: createQuery.rows[0].articleid,
                         createdOn: createQuery.rows[0].createdon,
-                        userId
+                        title: createQuery.rows[0].title
                     }
                 })
             });
@@ -45,7 +45,47 @@ const articleController = {
         catch (e) {
             console.log(e);
         }
+    },
+    async modifyArticle (req, res) {
+        const id = parseInt(req.params.id);
 
+        try {
+            jwt.verify(req.token, process.env.SECRET_KEY, async (err, data) => {
+            
+                if (err) {
+                    res.status(403).json({
+                        status: 'error',
+                        error: 'incorrect token'
+                    })
+                };
+
+                const check = `SELECT * FROM articles WHERE articleid=$1`;
+                const checkValue = [id];
+                const checkQuery = await pool.query(check, checkValue);
+
+          
+                const title = req.body.title || checkQuery.rows[0].title;
+                const article = req.body.article || checkQuery.rows[0].article;
+
+                const modify = `UPDATE articles SET title=$1, article=$2, createdon=$3 WHERE articleid=$4 RETURNING *`;
+                const value = [title, article,new Date().toLocaleDateString(), id];
+                const modifyQuery = await pool.query(modify, value)
+
+                res.status(200).json({
+                    status: 'success',
+                    data: {
+                        message: 'Article successfully updated',
+                        title: title,
+                        article: article,
+                        modifiedOn: modifyQuery.rows[0].createdon
+                    }
+                })
+            })
+            
+        }
+        catch(e) {
+            console.log(e)
+        }
     }
 }
 
