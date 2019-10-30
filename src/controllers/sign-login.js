@@ -35,7 +35,7 @@ const register = {
             const userValue = [firstName, lastName, email, hashedPassword, gender, jobRole, department, address];
             const signUpQuerys = await pool.query(signUpQuery, userValue);
 
-            jwt.sign({firstName, lastName, email, password, gender, jobRole, department, address}, process.env.SECRET_KEY, {expiresIn : '24h'} ,(err, token) => {
+            jwt.sign({ email, password }, process.env.SECRET_KEY, {expiresIn : '24h'} ,(err, token) => {
                 res.status(200).json({
                     status: 'success',
                     data : {
@@ -72,33 +72,39 @@ const register = {
                 })
             }
 
-             const isMatch = bcrypt.compare(password, logInQuery.rows[0].password)
-
-           if(email === logInQuery.rows[0].email && isMatch) {
-               jwt.sign({ email, password}, process.env.SECRET_KEY, {expiresIn : '24h'}, (err, token) => {
-                res.status(200).json({
-                    status: 'success',
-                    data : {
-                       
-                        token,
-                        userId: logInQuery.rows[0].userid
-                    }
-                })
-               })
-           }
-        
+              bcrypt.compare(password, logInQuery.rows[0].password, (err, result) => {
+                if(email === logInQuery.rows[0].email && result === true) {
+                    jwt.sign({ email, password}, process.env.SECRET_KEY, {expiresIn : '24h'}, (err, token) => {
+                     res.status(200).json({
+                         status: 'success',
+                         data : {
+                             token,
+                             userId: logInQuery.rows[0].userid
+                         }
+                     })
+                    })
+                }
+                else {
+                    res.status(403).json({
+                        status: 'error',
+                        error: 'token not generated, incorrect email or password'
+                    })
+                }
+             })
         }
         catch(e) {
             console.log(e)
         }  
     },
-    verifyToken (req, res) {
-        const headers = req.headers['Authorization'];
+    verifyToken (req, res, next) {
+        const headers = req.headers['authorization'];
+        
         if(typeof headers !== 'undefined'){
             const beareHeader = headers.split(' ');
             const token = beareHeader[1];
     
             req.token = token
+            next();
         }
         else {
             res.status(403).json({

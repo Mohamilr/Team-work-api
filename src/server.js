@@ -2,8 +2,9 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import dotenv from 'dotenv';
 
-// router
-import userRouter from './routes/route';
+// routers
+import userRouter from './routes/register.route';
+import articleRouter from './routes/article.route';
 
 dotenv.config();
 
@@ -16,12 +17,13 @@ app.use(bodyParser.json({ extended : true }));
 
 // app router
 app.use('/api/v1/', userRouter);
+app.use('/api/v1/', articleRouter);
 
 // wronge routes
-app.use('*', () => {
-    resizeBy.status(404).json({
+app.use('*', (req, res) => {
+    res.status(404).json({
         status: 'error',
-        error: 'incorrect route'
+        error: 'wrong route'
     })
 })
 
