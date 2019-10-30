@@ -86,6 +86,34 @@ const articleController = {
         catch(e) {
             console.log(e)
         }
+    },
+    async deleteArticle (req, res) {
+        const id = parseInt(req.params.id)
+        try {
+            jwt.verify(req.token, process.env.SECRET_KEY, async (err, data) => {
+                if (err) {
+                    res.status(403).json({
+                        status: 'error',
+                        error: 'incorrect token'
+                    })
+                };
+
+                const remove = `DELETE FROM articles WHERE articleid=$1`;
+                const value = [id];
+                const removeQuery = await pool.query(remove, value);
+
+                res.status(200).json({
+                    status: 'success',
+                    data: {
+                        message: 'Article successfully deleted'
+                    }
+                })
+
+            })
+        }
+        catch (e) {
+            console.log(e);
+        }
     }
 }
 
