@@ -39,26 +39,26 @@ const userTable = async () => {
     }
 };
 
-// // // article table
-// const articleTable = async () => {
-//     const articleTableQuery = `CREATE TABLE IF NOT EXISTS
-//     articles(
-//         articleId SERIAL PRIMARY KEY NOT NULL UNIQUE,
-//         title VARCHAR(100) NOT NULL,
-//         article VARCHAR(500) NOT NULL,
-//         userId INT NOT NULL,
-//         createdOn DATE NOT NULL,
-//         FOREIGN KEY(userId) REFERENCES employee(userId)  ON DELETE CASCADE ON UPDATE CASCADE
-//     )`;
+// article table
+const articleTable = async () => {
+    const articleTableQuery = `CREATE TABLE IF NOT EXISTS
+    articles(
+        articleId SERIAL PRIMARY KEY NOT NULL UNIQUE,
+        title VARCHAR(100) NOT NULL,
+        article VARCHAR(500) NOT NULL,
+        userId INT NOT NULL,
+        createdOn DATE NOT NULL,
+        FOREIGN KEY(userId) REFERENCES employee(userId)  ON DELETE CASCADE ON UPDATE CASCADE
+    )`;
 
-//     try{
-//         await pool.query(articleTableQuery);
-//         console.log('article table created');
-//     }
-//     catch(e) {
-//         console.log(e)
-//     }
-// };
+    try{
+        await pool.query(articleTableQuery);
+        console.log('article table created');
+    }
+    catch(e) {
+        console.log(e)
+    }
+};
 
 // // //  article comment table
 // const articleCommentTable = async () => {
@@ -127,7 +127,7 @@ const userTable = async () => {
 
 // drop table
 // const dropTable = async () => {
-//     const dropTableQuery = `DROP TABLE IF EXISTS employee`
+//     const dropTableQuery = `DROP TABLE IF EXISTS articles`
 //     try{
 //         await pool.query(dropTableQuery)
 //         console.log('table dropped')
@@ -142,7 +142,7 @@ userTable();
 // gif
 // gifTable();
 // article
-// articleTable();
+articleTable();
 // article comment
 // articleCommentTable();
 // gif comment
