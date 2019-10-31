@@ -41,7 +41,7 @@ const register = {
                     data : {
                         message: 'user account successfully created',
                         token,
-                        userId: signUpQuerys.rows[0].userid
+                        authorId: signUpQuerys.rows[0].authorid
                     }
                 })
             })
@@ -79,7 +79,7 @@ const register = {
                          status: 'success',
                          data : {
                              token,
-                             userId: logInQuery.rows[0].userid
+                             authorId: logInQuery.rows[0].authorid
                          }
                      })
                     })

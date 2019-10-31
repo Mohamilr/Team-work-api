@@ -3,13 +3,13 @@ import pool from '../models/database';
 
 
 const articleController = {
-    async createArticle(req, res) {
-        const { title, article, userId } = req.body;
+     createArticle(req, res) {
+        const { title, article, authorId } = req.body;
 
         try {
             jwt.verify(req.token, process.env.SECRET_KEY, async (err, data) => {
-                if (!title || !article || !userId) {
-                    res.status(400).json({
+                if (!title || !article || !authorId) {
+                    return res.status(400).json({
                         status: 'error',
                         error: 'all fields are required'
                     });
@@ -25,9 +25,9 @@ const articleController = {
 
 
 
-                const create = `INSERT INTO articles (title, article, userid, createdon)
+                const create = `INSERT INTO articles (title, article, authorid, createdon)
                                 VALUES($1, $2, $3, $4) RETURNING *`;
-                const values = [title, article, userId, new Date().toLocaleDateString()];
+                const values = [title, article, authorId, new Date().toLocaleDateString()];
                 const createQuery = await pool.query(create, values);
 
                 res.status(201).json({
@@ -36,7 +36,8 @@ const articleController = {
                         message: 'Article successfully posted',
                         articleId: createQuery.rows[0].articleid,
                         createdOn: createQuery.rows[0].createdon,
-                        title: createQuery.rows[0].title
+                        title: createQuery.rows[0].title,
+                        article: createQuery.rows[0].article
                     }
                 })
             });
@@ -46,7 +47,7 @@ const articleController = {
             console.log(e);
         }
     },
-    async modifyArticle (req, res) {
+     modifyArticle (req, res) {
         const id = parseInt(req.params.id);
 
         try {
@@ -87,7 +88,7 @@ const articleController = {
             console.log(e)
         }
     },
-    async deleteArticle (req, res) {
+     deleteArticle (req, res) {
         const id = parseInt(req.params.id)
         try {
             jwt.verify(req.token, process.env.SECRET_KEY, async (err, data) => {

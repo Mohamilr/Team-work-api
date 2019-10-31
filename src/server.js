@@ -7,6 +7,7 @@ import fileUpload from 'express-fileupload';
 import userRouter from './routes/register.route';
 import articleRouter from './routes/article.route';
 import gifRouter from './routes/gif.route';
+import getRouter from './routes/get.route';
 
 dotenv.config();
 
@@ -26,6 +27,7 @@ app.use(fileUpload({
 app.use('/api/v1/', userRouter);
 app.use('/api/v1/', articleRouter);
 app.use('/api/v1', gifRouter);
+app.use('/api/v1', getRouter);
 
 // wronge routes
 app.use('*', (req, res) => {

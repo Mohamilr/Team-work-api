@@ -19,7 +19,7 @@ pool.on('connect', () => {})
 const userTable = async () => {
     const userTableQuery = `CREATE TABLE IF NOT EXISTS
     employee(
-        userId SERIAL PRIMARY KEY NOT NULL UNIQUE,
+        authorId SERIAL PRIMARY KEY NOT NULL UNIQUE,
         firstName VARCHAR(50) NOT NULL,
         lastName VARCHAR(50) NOT NULL,
         email VARCHAR(50) NOT NULL,
@@ -46,9 +46,9 @@ const articleTable = async () => {
         articleId SERIAL PRIMARY KEY NOT NULL UNIQUE,
         title VARCHAR(100) NOT NULL,
         article VARCHAR(500) NOT NULL,
-        userId INT NOT NULL,
+        authorId INT NOT NULL,
         createdOn DATE NOT NULL,
-        FOREIGN KEY(userId) REFERENCES employee(userId)  ON DELETE CASCADE ON UPDATE CASCADE
+        FOREIGN KEY(authorId) REFERENCES employee(authorId)  ON DELETE CASCADE ON UPDATE CASCADE
     )`;
 
     try{
@@ -67,10 +67,10 @@ const articleTable = async () => {
 //         commentId SERIAL PRIMARY KEY NOT NULL UNIQUE,
 //         comment VARCHAR(200) NOT NULL,
 //         createdOn DATE NOT NULL,
-//         userId INTEGER NOT NULL,
+//         authorId INTEGER NOT NULL,
 //         articleId INT,
 //         FOREIGN KEY(articleId) REFERENCES articles(articleId) ON UPDATE CASCADE ON DELETE CASCADE,
-//         FOREIGN KEY(userId) REFERENCES employee(userId) ON UPDATE CASCADE ON DELETE CASCADE
+//         FOREIGN KEY(authorId) REFERENCES employee(authorId) ON UPDATE CASCADE ON DELETE CASCADE
 //     )`;
 
 //     try{
@@ -89,9 +89,9 @@ const gifTable = async () => {
         gifId SERIAL PRIMARY KEY NOT NULL UNIQUE,
         image VARCHAR(500) NOT NULL,
         title VARCHAR(50) NOT NULL,
-        userId INT NOT NULL,
+        authorId INT NOT NULL,
         createdOn DATE NOT NULL,
-        FOREIGN KEY(userId) REFERENCES employee(userId) ON DELETE CASCADE ON UPDATE CASCADE
+        FOREIGN KEY(authorId) REFERENCES employee(authorId) ON DELETE CASCADE ON UPDATE CASCADE
     )`;
 
     try{
@@ -110,10 +110,10 @@ const gifTable = async () => {
 //         commentId SERIAL PRIMARY KEY NOT NULL UNIQUE,
 //         comment VARCHAR(200) NOT NULL,
 //         createdOn DATE NOT NULL,
-//         userId INTEGER,
+//         authorId INTEGER,
 //         gifId INT,
 //         FOREIGN KEY(gifId) REFERENCES gifs(gifId) ON UPDATE CASCADE ON DELETE CASCADE,
-//         FOREIGN KEY(userId) REFERENCES employee(userId) 
+//         FOREIGN KEY(authorId) REFERENCES employee(authorId) 
 //     )`
 
 //     try{
@@ -127,7 +127,7 @@ const gifTable = async () => {
 
 // drop table
 // const dropTable = async () => {
-//     const dropTableQuery = `DROP TABLE IF EXISTS articles`
+//     const dropTableQuery = `DROP TABLE IF EXISTS employee`
 //     try{
 //         await pool.query(dropTableQuery)
 //         console.log('table dropped')
