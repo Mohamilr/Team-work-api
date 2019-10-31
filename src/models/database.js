@@ -83,25 +83,25 @@ const articleTable = async () => {
 // };
 
 // // // gif table
-// const gifTable = async () => {
-//     const gifTableQuery = `CREATE TABLE IF NOT EXISTS
-//     gifs(
-//         gifId SERIAL PRIMARY KEY NOT NULL UNIQUE,
-//         image VARCHAR(300) NOT NULL,
-//         title VARCHAR(50) NOT NULL,
-//         userId INT NOT NULL,
-//         createdOn DATE NOT NULL,
-//         FOREIGN KEY(userId) REFERENCES employee(userId) ON DELETE CASCADE ON UPDATE CASCADE
-//     )`;
+const gifTable = async () => {
+    const gifTableQuery = `CREATE TABLE IF NOT EXISTS
+    gifs(
+        gifId SERIAL PRIMARY KEY NOT NULL UNIQUE,
+        image VARCHAR(500) NOT NULL,
+        title VARCHAR(50) NOT NULL,
+        userId INT NOT NULL,
+        createdOn DATE NOT NULL,
+        FOREIGN KEY(userId) REFERENCES employee(userId) ON DELETE CASCADE ON UPDATE CASCADE
+    )`;
 
-//     try{
-//         await pool.query(gifTableQuery)
-//         console.log('gif table created');
-//     }
-//     catch(e) {
-//         console.log(e)
-//     }
-// };
+    try{
+        await pool.query(gifTableQuery)
+        console.log('gif table created');
+    }
+    catch(e) {
+        console.log(e)
+    }
+};
 
 // // // gif comment table
 // const gifCommentTable = async () => {
@@ -139,10 +139,10 @@ const articleTable = async () => {
 
 // user
 userTable();
-// gif
-// gifTable();
 // article
 articleTable();
+// gif
+gifTable();
 // article comment
 // articleCommentTable();
 // gif comment
