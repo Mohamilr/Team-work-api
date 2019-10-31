@@ -12,10 +12,9 @@ cloudinary.config({
 
 
 const gifController = {
-    
-     async postGif (req, res) {
+     postGif (req, res) {
         let image = req.files.gif;
-        const { title, userId } = req.body;
+        const { title, authorId } = req.body;
         try {
             jwt.verify(req.token, process.env.SECRET_KEY, (err, data) => {
                 // if(err) {
