@@ -44,7 +44,7 @@ const gifController = {
                     status: 'success',
                     data:  {
                         gifId: gifQuery.rows[0].gifid,
-                        message: '',
+                        message: 'gif image successfully posted',
                         createdOn: gifQuery.rows[0].createdon,
                         title: gifQuery.rows[0].title,
                         imageUrl: gifQuery.rows[0].image

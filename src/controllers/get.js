@@ -47,36 +47,38 @@ const get = {
                 }
                 // const getSingleArticle = `SELECT a.articleId, a.title, c.comment, c.commentId, c.authorId FROM articles a JOIN article_comments c ON a.articleId=$1`
 
-                const getSingleArticle = `SELECT a.*, c.* FROM articles a , article_comments c WHERE a.articleId=c.articleId`
+                const getSingleArticle = `SELECT * FROM articles WHERE articleId=$1`
                 const value = [id]
                 const getSingleArticleQuery = await pool.query(getSingleArticle, value);
 
-                // res.status(200).json({
-                //     status: 'success',
-                //     data: {
-                //         id: getSingleArticleQuery.rows[0].articleid,
-                //         createdOn: getSingleArticleQuery.rows[0].createdon,
-                //         title: getSingleArticleQuery.rows[0].title,
-                //         article: getSingleArticleQuery.rows[0].article,
-                //         comment: []
-                //     }
-                // })
+                // 
+                const comment = await pool.query(`SELECT commentid, comment, authorid FROM article_comments WHERE articleId=${id}`)
+                res.status(200).json({
+                    status: 'success',
+                    data: {
+                        id: getSingleArticleQuery.rows[0].articleid,
+                        createdOn: getSingleArticleQuery.rows[0].createdon,
+                        title: getSingleArticleQuery.rows[0].title,
+                        article: getSingleArticleQuery.rows[0].article,
+                        comment: comment.rows
+                    }
+                })
+// console.log(getSingleArticleQuery)
 
-                 res.status(200).json({
-                        status: 'success',
-                        data: {
-                            id: getSingleArticleQuery.rows[0].articleid,
-                            createdOn: getSingleArticleQuery.rows[0].createdon,
-                            title: getSingleArticleQuery.rows[0].title,
-                            article: getSingleArticleQuery.rows[0].article,
-                            comment: [
-                                {
-                                    commentId: getSingleArticleQuery.rows
-                                }
-                            ]
-                        }
-                    })
-                // res.send(getSingleArticleQuery)
+                //  res.status(200).json({
+                //         status: 'success',
+                //         data: {
+                //             id: getSingleArticleQuery.rows[0].articleid,
+                //             createdOn: getSingleArticleQuery.rows[0].createdon,
+                //             title: getSingleArticleQuery.rows[0].title,
+                //             article: getSingleArticleQuery.rows[0].article,
+                //             comment: [
+                //                 {
+                //                     commentId: getSingleArticleQuery.rows
+                //                 }
+                //             ]
+                //         }
+                //     })
             })
         }
         catch (e) {
@@ -98,14 +100,17 @@ const get = {
                 const value = [id]
                 const getSingleGifQuery = await pool.query(getSingleGif, value);
 
+                // 
+                const comments = await pool.query(`SELECT commentid, comment, authorid FROM gif_comments WHERE gifId=${id}`)
+
                 res.status(200).json({
                     status: 'success',
                     data: {
                         id: getSingleGifQuery.rows[0].gifid,
-                        createdOn: getSingleGifQuery.rows[0].createdon,
-                        title: getSingleGifQuery.rows[0].title,
+                        createdOn: getSingleGifQuery.rows[0].gifcreatedon,
+                        title: getSingleGifQuery.rows[0].giftitle,
                         url: getSingleGifQuery.rows[0].image,
-                        comment: []
+                        comments: comments.rows
                     }
 
                 })
