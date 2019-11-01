@@ -44,21 +44,38 @@ const get = {
                         error: 'incorrect token'
                     })
                 }
+                // const getSingleArticle = `SELECT a.articleId, a.title, c.comment, c.commentId, c.authorId FROM articles a JOIN article_comments c ON a.articleId=$1`
 
-                const getSingleArticle = `SELECT * FROM articles WHERE articleId=$1`
+                const getSingleArticle = `SELECT a.*, c.* FROM articles a , article_comments c WHERE a.articleId=c.articleId`
                 const value = [id]
                 const getSingleArticleQuery = await pool.query(getSingleArticle, value);
 
-                res.status(200).json({
-                    status: 'success',
-                    data: {
-                        id: getSingleArticleQuery.rows[0].articleid,
-                        createdOn: getSingleArticleQuery.rows[0].createdon,
-                        title: getSingleArticleQuery.rows[0].title,
-                        article: getSingleArticleQuery.rows[0].article,
-                        comment: []
-                    }
-                })
+                // res.status(200).json({
+                //     status: 'success',
+                //     data: {
+                //         id: getSingleArticleQuery.rows[0].articleid,
+                //         createdOn: getSingleArticleQuery.rows[0].createdon,
+                //         title: getSingleArticleQuery.rows[0].title,
+                //         article: getSingleArticleQuery.rows[0].article,
+                //         comment: []
+                //     }
+                // })
+
+                 res.status(200).json({
+                        status: 'success',
+                        data: {
+                            id: getSingleArticleQuery.rows[0].articleid,
+                            createdOn: getSingleArticleQuery.rows[0].createdon,
+                            title: getSingleArticleQuery.rows[0].title,
+                            article: getSingleArticleQuery.rows[0].article,
+                            comment: [
+                                {
+                                    commentId: getSingleArticleQuery.rows
+                                }
+                            ]
+                        }
+                    })
+                // res.send(getSingleArticleQuery)
             })
         }
         catch (e) {
