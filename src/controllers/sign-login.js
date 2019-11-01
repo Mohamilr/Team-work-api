@@ -21,7 +21,7 @@ const register = {
             const check = await pool.query(checkQuery, value);
 
             if(check.rows[0]) {
-                res.status(400).json({
+                return res.status(400).json({
                     status: 'error',
                     error: 'user already exist'
                 })
@@ -66,7 +66,7 @@ const register = {
             const logInQuery = await pool.query(logIn, value);
 
             if(!logInQuery.rows[0]) {
-                res.status(400).json({
+                return res.status(400).json({
                     status: 'error',
                     error: 'email does not exist, please sign up'
                 })

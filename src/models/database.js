@@ -45,7 +45,7 @@ const articleTable = async () => {
     articles(
         articleId SERIAL PRIMARY KEY NOT NULL UNIQUE,
         title VARCHAR(100) NOT NULL,
-        article VARCHAR(500) NOT NULL,
+        article VARCHAR(5000) NOT NULL,
         authorId INT NOT NULL,
         createdOn DATE NOT NULL,
         FOREIGN KEY(authorId) REFERENCES employee(authorId)  ON DELETE CASCADE ON UPDATE CASCADE
@@ -61,28 +61,28 @@ const articleTable = async () => {
 };
 
 // // //  article comment table
-// const articleCommentTable = async () => {
-//     const articleCommentTableQuery = `CREATE TABLE IF NOT EXISTS
-//     article_comments(
-//         commentId SERIAL PRIMARY KEY NOT NULL UNIQUE,
-//         comment VARCHAR(200) NOT NULL,
-//         createdOn DATE NOT NULL,
-//         authorId INTEGER NOT NULL,
-//         articleId INT,
-//         FOREIGN KEY(articleId) REFERENCES articles(articleId) ON UPDATE CASCADE ON DELETE CASCADE,
-//         FOREIGN KEY(authorId) REFERENCES employee(authorId) ON UPDATE CASCADE ON DELETE CASCADE
-//     )`;
+const articleCommentTable = async () => {
+    const articleCommentTableQuery = `CREATE TABLE IF NOT EXISTS
+    article_comments(
+        commentId SERIAL PRIMARY KEY NOT NULL UNIQUE,
+        comment VARCHAR(300) NOT NULL,
+        createdOn DATE NOT NULL,
+        authorId INT NOT NULL,
+        articleId INT NOT NULL,
+        FOREIGN KEY(articleId) REFERENCES articles(articleId) ON UPDATE CASCADE ON DELETE CASCADE,
+        FOREIGN KEY(authorId) REFERENCES employee(authorId) ON UPDATE CASCADE ON DELETE CASCADE
+    )`;
 
-//     try{
-//         await pool.query(articleCommentTableQuery);
-//         console.log('article comment table created')
-//     }
-//     catch(e) {
-//         console.log(e)
-//     }
-// };
+    try{
+        await pool.query(articleCommentTableQuery);
+        console.log('article comment table created')
+    }
+    catch(e) {
+        console.log(e)
+    }
+};
 
-// // // gif table
+// gif table
 const gifTable = async () => {
     const gifTableQuery = `CREATE TABLE IF NOT EXISTS
     gifs(
@@ -144,7 +144,7 @@ articleTable();
 // gif
 gifTable();
 // article comment
-// articleCommentTable();
+articleCommentTable();
 // gif comment
 // gifCommentTable();
 // dropTable

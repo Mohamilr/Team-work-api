@@ -17,7 +17,7 @@ const articleController = {
 
 
                 if (err) {
-                    res.status(403).json({
+                    return res.status(403).json({
                         status: 'error',
                         error: 'incorrect token'
                     })
@@ -54,7 +54,7 @@ const articleController = {
             jwt.verify(req.token, process.env.SECRET_KEY, async (err, data) => {
             
                 if (err) {
-                    res.status(403).json({
+                    return res.status(403).json({
                         status: 'error',
                         error: 'incorrect token'
                     })
@@ -93,7 +93,7 @@ const articleController = {
         try {
             jwt.verify(req.token, process.env.SECRET_KEY, async (err, data) => {
                 if (err) {
-                    res.status(403).json({
+                    return res.status(403).json({
                         status: 'error',
                         error: 'incorrect token'
                     })
