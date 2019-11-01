@@ -36,7 +36,7 @@ const register = {
             const signUpQuerys = await pool.query(signUpQuery, userValue);
 
             jwt.sign({ email, password }, process.env.SECRET_KEY, {expiresIn : '24h'} ,(err, token) => {
-                res.status(200).json({
+                res.status(201).json({
                     status: 'success',
                     data : {
                         message: 'user account successfully created',
