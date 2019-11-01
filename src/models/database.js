@@ -104,26 +104,26 @@ const gifTable = async () => {
 };
 
 // // // gif comment table
-// const gifCommentTable = async () => {
-//     const gifCommentTableQuery = `CREATE TABLE IF NOT EXISTS
-//     gif_comments(
-//         commentId SERIAL PRIMARY KEY NOT NULL UNIQUE,
-//         comment VARCHAR(200) NOT NULL,
-//         createdOn DATE NOT NULL,
-//         authorId INTEGER,
-//         gifId INT,
-//         FOREIGN KEY(gifId) REFERENCES gifs(gifId) ON UPDATE CASCADE ON DELETE CASCADE,
-//         FOREIGN KEY(authorId) REFERENCES employee(authorId) 
-//     )`
+const gifCommentTable = async () => {
+    const gifCommentTableQuery = `CREATE TABLE IF NOT EXISTS
+    gif_comments(
+        commentId SERIAL PRIMARY KEY NOT NULL UNIQUE,
+        comment VARCHAR(200) NOT NULL,
+        createdOn DATE NOT NULL,
+        authorId INTEGER,
+        gifId INT,
+        FOREIGN KEY(gifId) REFERENCES gifs(gifId) ON UPDATE CASCADE ON DELETE CASCADE,
+        FOREIGN KEY(authorId) REFERENCES employee(authorId) 
+    )`
 
-//     try{
-//         await pool.query(gifCommentTableQuery);
-//         console.log('gif comment table created')
-//     }
-//     catch(e) {
-//         console.log(e)
-//     }
-// };
+    try{
+        await pool.query(gifCommentTableQuery);
+        console.log('gif comment table created')
+    }
+    catch(e) {
+        console.log(e)
+    }
+};
 
 // drop table
 // const dropTable = async () => {
@@ -146,7 +146,7 @@ gifTable();
 // article comment
 articleCommentTable();
 // gif comment
-// gifCommentTable();
+gifCommentTable();
 // dropTable
 // dropTable();
 
