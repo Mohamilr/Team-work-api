@@ -63,22 +63,6 @@ const get = {
                         comment: comment.rows
                     }
                 })
-// console.log(getSingleArticleQuery)
-
-                //  res.status(200).json({
-                //         status: 'success',
-                //         data: {
-                //             id: getSingleArticleQuery.rows[0].articleid,
-                //             createdOn: getSingleArticleQuery.rows[0].createdon,
-                //             title: getSingleArticleQuery.rows[0].title,
-                //             article: getSingleArticleQuery.rows[0].article,
-                //             comment: [
-                //                 {
-                //                     commentId: getSingleArticleQuery.rows
-                //                 }
-                //             ]
-                //         }
-                //     })
             })
         }
         catch (e) {
