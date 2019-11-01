@@ -88,10 +88,10 @@ const gifTable = async () => {
     gifs(
         gifId SERIAL PRIMARY KEY NOT NULL UNIQUE,
         image VARCHAR(500) NOT NULL,
-        title VARCHAR(50) NOT NULL,
-        authorId INT NOT NULL,
-        createdOn DATE NOT NULL,
-        FOREIGN KEY(authorId) REFERENCES employee(authorId) ON DELETE CASCADE ON UPDATE CASCADE
+        gifTitle VARCHAR(50) NOT NULL,
+        gifAuthorId INT NOT NULL,
+        gifCreatedOn DATE NOT NULL,
+        FOREIGN KEY(gifAuthorId) REFERENCES employee(authorId) ON DELETE CASCADE ON UPDATE CASCADE
     )`;
 
     try{
@@ -127,7 +127,7 @@ const gifCommentTable = async () => {
 
 // drop table
 // const dropTable = async () => {
-//     const dropTableQuery = `DROP TABLE IF EXISTS employee`
+//     const dropTableQuery = `DROP TABLE IF EXISTS gifs`
 //     try{
 //         await pool.query(dropTableQuery)
 //         console.log('table dropped')

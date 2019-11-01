@@ -25,6 +25,7 @@ const get = {
                 res.status(200).json({
                     status: 'success',
                     data: [
+                        getQuery.rowCount,
                         getQuery.rows
                     ]
                 })

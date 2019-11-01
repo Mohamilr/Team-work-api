@@ -15,10 +15,10 @@ cloudinary.config({
 const gifController = {
      postGif (req, res) {
         let image = req.files.gif;
-        const { title, authorId } = req.body;
+        const { gifTitle, gifAuthorId } = req.body;
         try {
             jwt.verify(req.token, process.env.SECRET_KEY, async (err, data) => {
-                if (!image || !title || !authorId) {
+                if (!image || !gifTitle || !gifAuthorId) {
                     return res.status(400).json({
                         status: 'error',
                         error: 'all fields are required'
@@ -35,9 +35,9 @@ const gifController = {
 
                 cloudinary.v2.uploader.upload(image.tempFilePath, {resourse_type : 'gif'})
                 .then(async (result) =>  {
-                const gif = `INSERT INTO gifs (image, title, authorId , createdOn)
+                const gif = `INSERT INTO gifs (image, gifTitle, gifAuthorId , gifCreatedOn)
             VALUES($1, $2, $3, $4) RETURNING *`;
-            const values = [result.url, title, authorId, new Date().toLocaleDateString()];
+            const values = [result.url, gifTitle, gifAuthorId, new Date().toLocaleDateString()];
             const gifQuery = await pool.query(gif, values)
 
                 res.status(201).json({
