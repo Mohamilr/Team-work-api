@@ -59,6 +59,34 @@ const gifController = {
         catch (e) {
             console.log(e);
         }    
+    },
+    deleteGif (req, res) {
+        const id = parseInt(req.params.id);
+        try {
+            jwt.verify(req.token, process.env.SECRET_KEY, async (err, data) => {
+                if(err) {
+                    return res.status(403).json({
+                        status: 'error',
+                        error: 'incorrect token'
+                    })
+                }
+
+                const deleteGif = `DELETE FROM gifs WHERE gifId=$1`
+                const value = [id];
+                const deleteGifQuery = await pool.query(deleteGif, value);
+
+                res.status(200).json({
+                    status: 'success',
+                    data : {
+                        message: 'gif post successfully deleted'
+                    }
+                })
+
+            })
+        }
+        catch (e) {
+            console.log(e)
+        } 
     }
 
 }
