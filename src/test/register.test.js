@@ -6,9 +6,33 @@ import app from '../server';
 chai.use(chaiHttp);
 chai.should();
 
-let token = null;
+let signUpToken = null;
+let logInToken = null;
 
 describe('POST register', () => {
+    // error if fields are empty
+    describe('POST sign up', () => {
+        it('should give error if fields are empty', (done) => {
+            chai.request(app)
+                .post('/api/v1/auth/create-user')
+                .send({
+                    firstName: '',
+                    lastName: '',
+                    email: 'new usermkmkm',
+                    password: 'admin',
+                    gender: 'male',
+                    jobRole: 'assistant',
+                    department: '',
+                    address: '4, alomosho'
+                })
+                .end((err, res) => {
+                    res.should.have.status(400)
+                })
+            done();
+        })
+    })
+
+
     // error if a user already exists
     describe('POST sign up', () => {
         it('should give error is a user already exists', (done) => {
@@ -27,7 +51,7 @@ describe('POST register', () => {
                 .end((err, res) => {
                     res.should.have.status(400)
                 })
-                done();
+            done();
         })
     })
 
@@ -39,7 +63,7 @@ describe('POST register', () => {
                 .send({
                     firstName: 'mama',
                     lastName: 'omo',
-                    email: 'new usermkmk',
+                    email: 'new',
                     password: 'admin',
                     gender: 'male',
                     jobRole: 'assistant',
@@ -48,11 +72,79 @@ describe('POST register', () => {
                 })
                 .end((err, res) => {
                     res.should.have.status(201)
-                    token = res.body.data.token;
+                    signUpToken = res.body.data.token;
                 })
-                done();
+            done();
+        })
+    })
+
+    //
+    // test log in
+    // error if fields are empty
+    describe('POST sign up', () => {
+        it('should give error if fields are empty', (done) => {
+            chai.request(app)
+                .post('/api/v1/auth/create-user')
+                .send({
+                    email: 'new usermkmkm',
+                    password: ''
+                })
+                .end((err, res) => {
+                    res.should.have.status(400)
+                })
+            done();
+        })
+    })
+
+    // error if user does not exist
+    describe('POST login', () => {
+        it('should give error if user does not exist', (done) => {
+            chai.request(app)
+            .post('/api/v1/auth/signin')
+            .send({
+                email: 'non existing user',
+                password: 'password'
+            })
+            .end((err, res) => {
+                res.should.status(400)
+            })
+            done();
+        })
+    })
+
+    // login a user
+    describe('POST login', () => {
+        it('should log in an existing user', (done) => {
+            chai.request(app)
+            .post('/api/v1/auth/signin')
+            .send({
+                email: 'new',
+                password: 'admin'
+            })
+            .end((err, res) => {
+                res.should.status(201)
+                logInToken = res.body.data.token
+            })
+            done();
+        })
+    })
+
+
+    // error for incorrect email or password
+    describe('POST login', () => {
+        it('should give error for incorrect email or password', (done) => {
+            chai.request(app)
+            .post('/api/v1/auth/signin')
+            .send({
+                email: 'new',
+                password: 'bypass'
+            })
+            .end((err, res) => {
+                res.should.status(403)
+            })
+            done();
         })
     })
 })
 
-export default token;
+export default { signUpToken, logInToken };

@@ -75,7 +75,7 @@ const register = {
               bcrypt.compare(password, logInQuery.rows[0].password, (err, result) => {
                 if(email === logInQuery.rows[0].email && result === true) {
                     jwt.sign({ email, password}, process.env.SECRET_KEY, {expiresIn : '24h'}, (err, token) => {
-                     res.status(200).json({
+                     res.status(201).json({
                          status: 'success',
                          data : {
                              token,
