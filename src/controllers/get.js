@@ -69,6 +69,13 @@ const get = {
         const id = parseInt(req.params.id);
         try {
             jwt.verify(req.token, process.env.SECRET_KEY, async (err, data) => {
+                if (err) {
+                    return res.status(403).json({
+                        status: 'error',
+                        error: 'incorrect token'
+                    })
+                }
+                
                 const getSingleGif = `SELECT * FROM gifs WHERE gifId=$1`
                 const value = [id]
                 const getSingleGifQuery = await pool.query(getSingleGif, value);

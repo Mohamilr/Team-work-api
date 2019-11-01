@@ -8,6 +8,7 @@ import userRouter from './routes/register.route';
 import articleRouter from './routes/article.route';
 import gifRouter from './routes/gif.route';
 import getRouter from './routes/get.route';
+import commentRouter from './routes/comment.route';
 
 dotenv.config();
 
@@ -28,6 +29,7 @@ app.use('/api/v1/', userRouter);
 app.use('/api/v1/', articleRouter);
 app.use('/api/v1', gifRouter);
 app.use('/api/v1', getRouter);
+app.use('/api/v1/', commentRouter);
 
 // wronge routes
 app.use('*', (req, res) => {
