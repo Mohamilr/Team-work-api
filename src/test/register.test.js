@@ -118,8 +118,8 @@ describe('POST register', () => {
             chai.request(app)
             .post('/api/v1/auth/signin')
             .send({
-                email: 'new',
-                password: 'admin'
+                email: 'mohammed',
+                password: 'ibrahim'
             })
             .end((err, res) => {
                 res.should.status(201)
