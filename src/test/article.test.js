@@ -65,6 +65,8 @@ describe('articles', () => {
         })
     })
 
+
+
     // test modify route
     describe('modify article', () => {
         // give error on wrong token
@@ -100,6 +102,36 @@ describe('articles', () => {
                         res.should.have.status(200)
                     })
                     done();
+            })
+        })
+    })
+
+
+    // test delete route
+    describe('delete article', () => {
+        // error on wrong token
+        describe('DELETE article', () => {
+            const id = 3;
+            it('should delete an article', () => {
+                chai.request(app)
+                .delete(`/api/v1/articles/${id}`)
+                .set('Authorization', `bearer wrong token`)
+                .end((err, res) => {
+                    res.should.have.status(403)
+                })
+            })
+        })
+
+        // delete an article
+        describe('DELETE article', () => {
+            const id = 3;
+            it('should delete an article', () => {
+                chai.request(app)
+                .delete(`/api/v1/articles/${id}`)
+                .set('Authorization', `bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im1vaGFtbWVkIiwicGFzc3dvcmQiOiJpYnJhaGltIiwiaWF0IjoxNTcyNzUyNjE1LCJleHAiOjE1NzI4MzkwMTV9.aNUBP0nNhk5etK-Fb98UzDQOZH1sPIrnbFsAEsRiAVo`)
+                .end((err, res) => {
+                    res.should.have.status(200)
+                })
             })
         })
     })
