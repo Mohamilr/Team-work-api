@@ -27,7 +27,7 @@ const articleController = {
 
                 const create = `INSERT INTO articles (title, article, authorid, createdon)
                                 VALUES($1, $2, $3, $4) RETURNING *`;
-                const values = [title, article, authorId, new Date().toLocaleDateString()];
+                const values = [title, article, authorId, new Date().toLocaleString()];
                 const createQuery = await pool.query(create, values);
 
                 res.status(201).json({
@@ -69,7 +69,7 @@ const articleController = {
                 const article = req.body.article || checkQuery.rows[0].article;
 
                 const modify = `UPDATE articles SET title=$1, article=$2, createdon=$3 WHERE articleid=$4 RETURNING *`;
-                const value = [title, article,new Date().toLocaleDateString(), id];
+                const value = [title, article, new Date().toLocaleString(), id];
                 const modifyQuery = await pool.query(modify, value)
 
                 res.status(200).json({
