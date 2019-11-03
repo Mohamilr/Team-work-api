@@ -6,8 +6,8 @@ import app from '../server';
 chai.use(chaiHttp);
 chai.should();
 
-let signUpToken = null;
-let logInToken = null;
+// let signUpToken = null;
+let logInToken = '';
 
 describe('POST register', () => {
     // error if fields are empty
@@ -56,7 +56,7 @@ describe('POST register', () => {
     })
 
     // register new user
-    describe('POST sign up', () => {
+    describe.skip('POST sign up', () => {
         it('should sign up a user', (done) => {
             chai.request(app)
                 .post('/api/v1/auth/create-user')
@@ -106,7 +106,7 @@ describe('POST register', () => {
                 password: 'password'
             })
             .end((err, res) => {
-                res.should.status(400)
+                res.should.have.status(400)
             })
             done();
         })
@@ -118,11 +118,11 @@ describe('POST register', () => {
             chai.request(app)
             .post('/api/v1/auth/signin')
             .send({
-                email: 'new',
-                password: 'admin'
+                email: 'mohammed',
+                password: 'ibrahim'
             })
             .end((err, res) => {
-                res.should.status(201)
+                res.should.have.status(201)
                 logInToken = res.body.data.token
             })
             done();
@@ -140,11 +140,11 @@ describe('POST register', () => {
                 password: 'bypass'
             })
             .end((err, res) => {
-                res.should.status(403)
+                res.should.have.status(403)
             })
             done();
         })
     })
 })
 
-export default { signUpToken, logInToken };
+export default logInToken;
