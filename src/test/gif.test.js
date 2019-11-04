@@ -28,7 +28,7 @@ describe('gif route', () => {
         })
 
         // error on wrong token
-        it('should give error on empty body value', (done) => {
+        it('should give an error on wrong token', (done) => {
             chai.request(app)
                 .post('/api/v1/gifs')
                 .set('Authorization', `bearer wrong token`)
@@ -43,7 +43,7 @@ describe('gif route', () => {
         })
 
         // test gif upload
-        it('should give error on empty body value', (done) => {
+        it('should post a gif', (done) => {
             chai.request(app)
                 .post('/api/v1/gifs')
                 .set('Authorization', `bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im1vaGFtbWVkIiwicGFzc3dvcmQiOiJpYnJhaGltIiwiaWF0IjoxNTcyNzUyNjE1LCJleHAiOjE1NzI4MzkwMTV9.aNUBP0nNhk5etK-Fb98UzDQOZH1sPIrnbFsAEsRiAVo`)
@@ -62,6 +62,8 @@ describe('gif route', () => {
     // test DELETE
     describe('delete gif', () => {
         const id = 5;
+
+        // error on wrong token
         it('should give an error on wrong token', (done) => {
             chai.request(app)
             .delete(`/api/v1/gifs/${id}`)
