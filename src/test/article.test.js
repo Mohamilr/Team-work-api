@@ -89,7 +89,7 @@ describe('articles', () => {
 
         // modify an article
         describe('PATCH modify article', () => {
-            const id = 3;
+            const id = 8;
             it('should modify an article', (done) => {
                 chai.request(app)
                     .patch(`/api/v1/articles/${id}`)
@@ -111,27 +111,29 @@ describe('articles', () => {
     describe('delete article', () => {
         // error on wrong token
         describe('DELETE article', () => {
-            const id = 3;
-            it('should delete an article', () => {
+            const id = 4;
+            it('should delete an article', (done) => {
                 chai.request(app)
                 .delete(`/api/v1/articles/${id}`)
                 .set('Authorization', `bearer wrong token`)
                 .end((err, res) => {
                     res.should.have.status(403)
                 })
+                done();
             })
         })
 
         // delete an article
         describe('DELETE article', () => {
-            const id = 3;
-            it('should delete an article', () => {
+            const id = 5;
+            it('should delete an article', (done) => {
                 chai.request(app)
                 .delete(`/api/v1/articles/${id}`)
                 .set('Authorization', `bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im1vaGFtbWVkIiwicGFzc3dvcmQiOiJpYnJhaGltIiwiaWF0IjoxNTcyNzUyNjE1LCJleHAiOjE1NzI4MzkwMTV9.aNUBP0nNhk5etK-Fb98UzDQOZH1sPIrnbFsAEsRiAVo`)
                 .end((err, res) => {
                     res.should.have.status(200)
                 })
+                done();
             })
         })
     })
