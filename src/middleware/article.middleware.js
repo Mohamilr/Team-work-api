@@ -1,5 +1,5 @@
 const articleCheck = {
-    checkPostArticle (req, res ,next) {
+    checkPost_ModifyArticle (req, res ,next) {
         const { title, article } = req.body;
 
         if (title.length < 5) {

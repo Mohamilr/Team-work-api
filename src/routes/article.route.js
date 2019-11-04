@@ -6,8 +6,8 @@ import articleMiddleware from '../middleware/article.middleware';
 
 const articleRouter = Router();
 
-articleRouter.post('/articles', verify.verifyToken, articleMiddleware.checkPostArticle ,articleController.createArticle);
-articleRouter.patch('/articles/:id', verify.verifyToken, articleController.modifyArticle);
+articleRouter.post('/articles', verify.verifyToken, articleMiddleware.checkPost_ModifyArticle ,articleController.createArticle);
+articleRouter.patch('/articles/:id', verify.verifyToken, articleMiddleware.checkPost_ModifyArticle ,articleController.modifyArticle);
 articleRouter.delete('/articles/:id', verify.verifyToken, articleController.deleteArticle);
 
 export default articleRouter;
