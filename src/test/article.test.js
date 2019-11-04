@@ -18,7 +18,7 @@ describe('articles', () => {
                 .set('Authorization', `bearer wrong token`)
                 .send({
                     title: 'my first official project',
-                    article: 'i was an intern at Hotels.ng.',
+                    article: 'i was an intern at Hotels.ng. i worked with different teams and was assigned to different projects. it was a great experience to be a part of HNG internship 6.',
                     authorId: 1
                 })
                 .end((err, res) => {
@@ -53,7 +53,7 @@ describe('articles', () => {
                 .set('Authorization', `bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im1vaGFtbWVkIiwicGFzc3dvcmQiOiJpYnJhaGltIiwiaWF0IjoxNTcyODc1ODk2LCJleHAiOjE1NzI5NjIyOTZ9.Xd1C7c4T4DrQY5hZV0-J7dNmH1ioqwuH-956yDLMLlE`)
                 .send({
                     title: 'my first official project',
-                    article: 'i was an intern at Hotels.ng.',
+                    article: 'i was an intern at Hotels.ng. i worked with different teams and was assigned to different projects. it was a great experience to be a part of HNG internship 6.',
                     authorId: 1
                 })
                 .end((err, res) => {
