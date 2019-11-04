@@ -7,18 +7,18 @@ const comments = {
         const { comment, authorId } = req.body;
         try {
             jwt.verify(req.token, process.env.SECRET_KEY, async (err, data) => {
-                if (!comment || !authorId) {
-                    return res.status(400).json({
-                        status: 'error',
-                        error: 'all fields are required'
-                    });
-                };
-
                 if(err) {
                     return res.status(403).json({
                         status: 'error',
                         error: 'incorrect token'
                     })
+                }
+
+                if (!comment || !authorId) {
+                    return res.status(400).json({
+                        status: 'error',
+                        error: 'all fields are required'
+                    });
                 }
 
                 const check = `SELECT * FROM articles WHERE articleid=$1`;
