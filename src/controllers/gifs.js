@@ -37,7 +37,7 @@ const gifController = {
                 .then(async (result) =>  {
                 const gif = `INSERT INTO gifs (image, gifTitle, gifAuthorId , gifCreatedOn)
             VALUES($1, $2, $3, $4) RETURNING *`;
-            const values = [result.url, gifTitle, gifAuthorId, new Date().toLocaleDateString()];
+            const values = [result.url, gifTitle, gifAuthorId, new Date().toLocaleString()];
             const gifQuery = await pool.query(gif, values)
 
                 res.status(201).json({

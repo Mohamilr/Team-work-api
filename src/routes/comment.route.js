@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import verify from '../controllers/sign-login';
+import verify from '../controllers/register';
 import comment from '../controllers/comments';
 
 const commentRouter = Router();

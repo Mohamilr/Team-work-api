@@ -2,7 +2,7 @@ import { Router } from 'express';
 
 import gifController from '../controllers/gifs';
 
-import verify from '../controllers/sign-login';
+import verify from '../controllers/register';
 
 
 const gifRouter = Router();

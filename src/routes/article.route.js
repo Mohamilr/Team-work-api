@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import articleController from '../controllers/articles';
-import  verify from '../controllers/sign-login';
+import  verify from '../controllers/register';
 
 const articleRouter = Router();
 

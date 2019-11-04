@@ -28,7 +28,7 @@ const comments = {
 
                 const comments = `INSERT INTO article_comments (comment, createdon, authorid, articleid)
                                 VALUES($1, $2, $3, $4) RETURNING *`;
-                const values = [comment, new Date().toLocaleDateString(), authorId, id];
+                const values = [comment, new Date().toLocaleString(), authorId, id];
                 const commentQuery = await pool.query(comments, values);
                 
 
@@ -76,7 +76,7 @@ const comments = {
 
                 const comments = `INSERT INTO gif_comments (comment, createdon, authorid, gifid)
                                 VALUES($1, $2, $3, $4) RETURNING *`;
-                const values = [comment, new Date().toLocaleDateString(), authorId, id];
+                const values = [comment, new Date().toLocaleString(), authorId, id];
                 const commentQuery = await pool.query(comments, values);
                 
 
