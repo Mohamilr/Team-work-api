@@ -13,7 +13,7 @@ describe.skip('articles', () => {
     describe('create article', () => {
         // error om wrong token
         describe('POST create article', () => {
-            it('should give error on wrong token', ((done) => {
+            it('should give error on wrong token', (done) => {
                 chai.request(app)
                     .post('/api/v1/articles')
                     .set('Authorization', `bearer wrong token`)
@@ -26,7 +26,7 @@ describe.skip('articles', () => {
                         res.should.have.status(403)
                     })
                 done();
-            }))
+            })
         })
 
 
