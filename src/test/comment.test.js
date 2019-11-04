@@ -8,7 +8,7 @@ import app from '../server';
 chai.use(chaiHttp);
 chai.should();
 
-describe('POST comment', () => {
+describe.skip('POST comment', () => {
     // test article comment
     describe('POST article comment', () => {
         const id = 6;
