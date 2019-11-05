@@ -47,7 +47,7 @@ const articleTable = async () => {
         title VARCHAR(100) NOT NULL,
         article VARCHAR(5000) NOT NULL,
         authorId INT NOT NULL,
-        createdOn DATE NOT NULL,
+        createdOn VARCHAR(50) NOT NULL,
         FOREIGN KEY(authorId) REFERENCES employee(authorId)  ON DELETE CASCADE ON UPDATE CASCADE
     )`;
 
@@ -66,7 +66,7 @@ const articleCommentTable = async () => {
     article_comments(
         commentId SERIAL PRIMARY KEY NOT NULL UNIQUE,
         comment VARCHAR(300) NOT NULL,
-        createdOn DATE NOT NULL,
+        createdOn VARCHAR(50) NOT NULL,
         authorId INT NOT NULL,
         articleId INT NOT NULL,
         FOREIGN KEY(articleId) REFERENCES articles(articleId) ON UPDATE CASCADE ON DELETE CASCADE,
@@ -90,7 +90,7 @@ const gifTable = async () => {
         image VARCHAR(500) NOT NULL,
         gifTitle VARCHAR(50) NOT NULL,
         gifAuthorId INT NOT NULL,
-        gifCreatedOn DATE NOT NULL,
+        gifCreatedOn VARCHAR(50) NOT NULL,
         FOREIGN KEY(gifAuthorId) REFERENCES employee(authorId) ON DELETE CASCADE ON UPDATE CASCADE
     )`;
 
@@ -108,8 +108,8 @@ const gifCommentTable = async () => {
     const gifCommentTableQuery = `CREATE TABLE IF NOT EXISTS
     gif_comments(
         commentId SERIAL PRIMARY KEY NOT NULL UNIQUE,
-        comment VARCHAR(200) NOT NULL,
-        createdOn DATE NOT NULL,
+        comment VARCHAR(300) NOT NULL,
+        createdOn VARCHAR(50) NOT NULL,
         authorId INTEGER,
         gifId INT,
         FOREIGN KEY(gifId) REFERENCES gifs(gifId) ON UPDATE CASCADE ON DELETE CASCADE,
