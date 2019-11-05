@@ -77,7 +77,7 @@ describe('articles', () => {
                 .set('Authorization', `bearer wrong token`)
                 .send({
                     title: 'vacation',
-                    article: 'i travlled to my home town during the school holiday'
+                    article: 'i was an intern at Hotels.ng. i worked with different teams and was assigned to different projects. it was a great experience to be a part of HNG internship 6.'
                 })
                 .end((err, res) => {
                     res.should.have.status(403);
@@ -93,7 +93,7 @@ describe('articles', () => {
                 .set('Authorization', `bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im1vaGFtbWVkIiwicGFzc3dvcmQiOiJpYnJhaGltIiwiaWF0IjoxNTcyOTUzMTczLCJleHAiOjE1NzMwMzk1NzN9.-ULN0A6ch9baM-4_CosmQEp1fcDhXwDeikrDWmGRZww`)
                 .send({
                     title: 'vacation',
-                    article: 'i travlled to my home town during the school holiday'
+                    article: 'i was an intern at Hotels.ng. i worked with different teams and was assigned to different projects. it was a great experience to be a part of HNG internship 6.'
                 })
                 .end((err, res) => {
                     res.should.have.status(200);

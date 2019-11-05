@@ -1,19 +1,6 @@
 const registerMiddleware = {
     checkSignUp(req, res, next) {
-        const { firstName, lastName, email, password, gender, jobRole, department, address } = req.body;
-        if (firstName.length < 3) {
-            return res.status(400).json({
-                status: 'error',
-                error: 'name should be more than 2 letters'
-            })
-        }
-
-        if (lastName.length < 3) {
-            return res.status(400).json({
-                status: 'error',
-                error: 'name should be more than 2 letters'
-            })
-        }
+        const { email, password, gender, department, address } = req.body;
 
         if (!(/[\w]+@[a-zA-Z]+\.com$/.test(email))) {
             return res.status(400).json({
