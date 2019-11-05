@@ -37,7 +37,7 @@ describe('GET', () => {
         it('should get all articles and gif', (done) => {
             chai.request(app)
             .get('/api/v1/feed')
-            .set('Authorization', `bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im1vaGFtbWVkIiwicGFzc3dvcmQiOiJpYnJhaGltIiwiaWF0IjoxNTcyODc1ODk2LCJleHAiOjE1NzI5NjIyOTZ9.Xd1C7c4T4DrQY5hZV0-J7dNmH1ioqwuH-956yDLMLlE`)
+            .set('Authorization', `bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im1vaGFtbWVkIiwicGFzc3dvcmQiOiJpYnJhaGltIiwiaWF0IjoxNTcyOTUzMTczLCJleHAiOjE1NzMwMzk1NzN9.-ULN0A6ch9baM-4_CosmQEp1fcDhXwDeikrDWmGRZww`)
             .end((err, res) => {
                 res.should.have.status(200);
                 res.body.should.be.a('object');
@@ -67,7 +67,7 @@ describe('GET', () => {
         it('should get a single article', (done) => {
             chai.request(app)
             .get(`/api/v1/articles/${id}`)
-            .set('Authorization', `bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im1vaGFtbWVkIiwicGFzc3dvcmQiOiJpYnJhaGltIiwiaWF0IjoxNTcyODY5MjQwLCJleHAiOjE1NzI5NTU2NDB9.baWcD6MoX8NAKvdTLt46gz6y4U6rOTTi8OgU64cIEI0`)
+            .set('Authorization', `bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im1vaGFtbWVkIiwicGFzc3dvcmQiOiJpYnJhaGltIiwiaWF0IjoxNTcyOTUzMTczLCJleHAiOjE1NzMwMzk1NzN9.-ULN0A6ch9baM-4_CosmQEp1fcDhXwDeikrDWmGRZww`)
             .end((err, res) => {
                 res.should.have.status(200);
                 res.body.should.be.a('object');
@@ -96,7 +96,7 @@ describe('GET', () => {
         it('should give an error on wrong token', (done) => {
             chai.request(app)
             .get(`/api/v1/gifs/${id}`)
-            .set('Authorization', `bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im1vaGFtbWVkIiwicGFzc3dvcmQiOiJpYnJhaGltIiwiaWF0IjoxNTcyODY5MjQwLCJleHAiOjE1NzI5NTU2NDB9.baWcD6MoX8NAKvdTLt46gz6y4U6rOTTi8OgU64cIEI0`)
+            .set('Authorization', `bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im1vaGFtbWVkIiwicGFzc3dvcmQiOiJpYnJhaGltIiwiaWF0IjoxNTcyOTUzMTczLCJleHAiOjE1NzMwMzk1NzN9.-ULN0A6ch9baM-4_CosmQEp1fcDhXwDeikrDWmGRZww`)
             .end((err, res) => {
                 res.should.have.status(200);
                 res.body.should.be.a('object');
