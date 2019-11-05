@@ -1,15 +1,10 @@
 import jwt from 'jsonwebtoken';
 import cloudinary from 'cloudinary';
-import { image } from 'cloudinary/lib-es5/cloudinary';
 import pool from '../models/database';
 
 // configure cloudinary
+import cloudinaryConfig from '../config/cloudinary.config';
 
-cloudinary.config({
-    cloud_name: process.env.CLOUD_NAME,
-    api_key: process.env.API_KEY,
-    api_secret: process.env.API_SECRET
-})
 
 
 const gifController = {
