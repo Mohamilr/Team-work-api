@@ -11,7 +11,7 @@ chai.should();
 describe.skip('POST comment', () => {
     // test article comment
     describe('POST article comment', () => {
-        const id = 6;
+        const id = 1;
 
         // error on empty body values
         it('should give an error on empty body values', (done) => {
@@ -65,7 +65,7 @@ describe.skip('POST comment', () => {
 
     // test gif comment
     describe('POST gif comment', () => {
-        const id = 7;
+        const id = 1;
 
         // error on empty body values
         it('should give an error on empty body values', (done) => {
