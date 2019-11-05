@@ -62,8 +62,8 @@ describe('POST register', () => {
                 .send({
                     firstName: 'mohammed',
                     lastName: 'ibrahim',
-                    email: 'codedcoder@gmail.com',
-                    password: 'admin',
+                    email: 'ibra@gmail.com',
+                    password: 'administrator',
                     gender: 'male',
                     jobRole: 'assistant',
                     department: 'engineer',
