@@ -60,7 +60,7 @@ describe.skip('gif route', () => {
 
     // test DELETE
     describe('delete gif', () => {
-        const id = 5;
+        const id = 2;
 
         // error on wrong token
         it('should give an error on wrong token', (done) => {

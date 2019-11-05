@@ -49,7 +49,7 @@ describe('GET', () => {
 
     // test get single article
     describe('GET single article', () => {
-        const id = 9;
+        const id = 1;
         // error on wrong token
         it('should give an error on wrong token', (done) => {
             chai.request(app)
@@ -79,7 +79,7 @@ describe('GET', () => {
 
     // test get single gif
     describe('GET single gif', () => {
-        const id = 2;
+        const id = 1;
         // error on wrong token
         it('should give an error on wrong token', (done) => {
             chai.request(app)

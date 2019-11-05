@@ -70,7 +70,7 @@ describe('articles', () => {
     // test modify route
     describe('PATCH modify article', () => {
         // give error on wrong token
-        const id = 10;
+        const id = 1;
         it('should give an error on wrong token', (done) => {
             chai.request(app)
                 .patch(`/api/v1/articles/${id}`)
@@ -107,7 +107,7 @@ describe('articles', () => {
     // test delete route
     describe('delete article', () => {
         // error on wrong token
-        const id = 4;
+        const id = 2;
         it('should delete an article', (done) => {
             chai.request(app)
                 .delete(`/api/v1/articles/${id}`)
