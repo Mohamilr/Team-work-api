@@ -8,9 +8,9 @@ import app from '../server';
 chai.use(chaiHttp);
 chai.should();
 
-describe.skip('gif route', () => {
+describe('gif route', () => {
     // test POST
-    describe('create gif', () => {
+    describe.skip('create gif', () => {
         // error on empty body value
         it('should give error on empty body value', (done) => {
             chai.request(app)

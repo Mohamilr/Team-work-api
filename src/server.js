@@ -12,7 +12,7 @@ import getRouter from './routes/get.route';
 import commentRouter from './routes/comment.route';
 
 // swagger documentation
-import swaggerDocs from '../swagger.json'
+import apiDocs from '../swagger.json'
  
 dotenv.config();
 
@@ -36,7 +36,15 @@ app.use('/api/v1', getRouter);
 app.use('/api/v1/', commentRouter);
 
 // swagger route
-app.use('/api/v1/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs))
+app.use('/api/v1/docs', swaggerUi.serve, swaggerUi.setup(apiDocs))
+
+// welcome route
+app.use('/', (req, res) => {
+    res.status(200).json(({
+        status: 'success',
+        message: 'welcome to the team work api'
+    }))
+})
 
 // wronge routes
 app.use('*', (req, res) => {
