@@ -1,0 +1,748 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "version": "1.0",
+        "title": "team app api",
+        "description": "Teamwork is an internal social network for employees of an organization. The goal of this application is to facilitate more interaction between colleagues and promote team bonding.",
+        "contact": {
+            "email": "ibrahimdamy7@gmail.com"
+        }
+    },
+    "host": "localhost:3000",
+    "basePath": "/api/v1",
+    "securityDefinitions": {},
+    "schemes": [
+        "http"
+    ],
+    "consumes": [
+        "application/json"
+    ],
+    "produces": [
+        "application/json"
+    ],
+    "paths": {
+        "/auth/create-user": {
+            "post": {
+                "description": "to sign up a new user",
+                "summary": "sign up users",
+                "tags": [
+                    "Register"
+                ],
+                "operationId": "AuthCreateUserPost",
+                "deprecated": false,
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": false,
+                        "default": "Bearer {token}",
+                        "type": "string"
+                    },
+                    {
+                        "name": "Content-Type",
+                        "in": "header",
+                        "required": true,
+                        "type": "string",
+                        "description": ""
+                    },
+                    {
+                        "name": "Body",
+                        "in": "body",
+                        "required": true,
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/signupusersrequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "user account created successfully",
+                        "headers": {}
+                    },
+                    "400": {
+                        "description": "useralready exist",
+                        "headers": {}
+                    }
+                }
+            }
+        },
+        "/auth/signin": {
+            "post": {
+                "description": "it grants access to an existing user ",
+                "summary": "login in a user",
+                "tags": [
+                    "Register"
+                ],
+                "operationId": "AuthSigninPost",
+                "deprecated": false,
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": false,
+                        "default": "Bearer {token}",
+                        "type": "string"
+                    },
+                    {
+                        "name": "Content-Type",
+                        "in": "header",
+                        "required": true,
+                        "type": "string",
+                        "description": ""
+                    },
+                    {
+                        "name": "Body",
+                        "in": "body",
+                        "required": true,
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/logininauserrequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "user successfully loged in",
+                        "headers": {}
+                    },
+                    "400": {
+                        "description": "email does not exist, please sign up",
+                        "headers": {}
+                    },
+                    "403": {
+                        "description": "token not generated, incorrect email or password",
+                        "headers": {}
+                    }
+                }
+            }
+        },
+        "/articles": {
+            "post": {
+                "description": "registered users can create articles",
+                "summary": "create article",
+                "tags": [
+                    "Article"
+                ],
+                "operationId": "ArticlesPost",
+                "deprecated": false,
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": false,
+                        "default": "Bearer {token}",
+                        "type": "string"
+                    },
+                    {
+                        "name": "Content-Type",
+                        "in": "header",
+                        "required": true,
+                        "type": "string",
+                        "description": ""
+                    },
+                    {
+                        "name": "Body",
+                        "in": "body",
+                        "required": true,
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/createarticlerequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Article successfully posted",
+                        "headers": {}
+                    },
+                    "403": {
+                        "description": "incorrect token",
+                        "headers": {}
+                    },
+                    "400": {
+                        "description": "all input fields are required",
+                        "headers": {}
+                    }
+                }
+            }
+        },
+        "/articles/1": {
+            "patch": {
+                "description": "a register user can modify his/her articles ",
+                "summary": "Modify an article",
+                "tags": [
+                    "Article"
+                ],
+                "operationId": "Articles1Patch",
+                "deprecated": false,
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": false,
+                        "default": "Bearer {token}",
+                        "type": "string"
+                    },
+                    {
+                        "name": "Content-Type",
+                        "in": "header",
+                        "required": true,
+                        "type": "string",
+                        "description": ""
+                    },
+                    {
+                        "name": "Body",
+                        "in": "body",
+                        "required": true,
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/ModifyanarticleRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Article successfully updated",
+                        "headers": {}
+                    },
+                    "403": {
+                        "description": "incorrect token",
+                        "headers": {}
+                    }
+                }
+            },
+            "get": {
+                "description": "TODO: Add Description",
+                "summary": "get single article",
+                "tags": [
+                    "Article"
+                ],
+                "operationId": "Articles1Get",
+                "deprecated": false,
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": false,
+                        "default": "Bearer {token}",
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "success",
+                        "headers": {}
+                    },
+                    "403": {
+                        "description": "incorrect token",
+                        "headers": {}
+                    }
+                }
+            }
+        },
+        "/articles/4": {
+            "delete": {
+                "description": "a registered user can delete his/her article",
+                "summary": "delete an article",
+                "tags": [
+                    "Article"
+                ],
+                "operationId": "Articles4Delete",
+                "deprecated": false,
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": false,
+                        "default": "Bearer {token}",
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Article successfully deleted",
+                        "headers": {}
+                    },
+                    "403": {
+                        "description": "incorrect token",
+                        "headers": {}
+                    }
+                }
+            }
+        },
+        "/gifs": {
+            "post": {
+                "description": "an authorized user can create a gif post",
+                "summary": "create a gif post",
+                "tags": [
+                    "Gif"
+                ],
+                "operationId": "GifsPost",
+                "deprecated": false,
+                "produces": [
+                    "application/json"
+                ],
+                "consumes": [
+                    "application/x-www-form-urlencoded"
+                ],
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": false,
+                        "default": "Bearer {token}",
+                        "type": "string"
+                    },
+                    {
+                        "name": "gif",
+                        "in": "formData",
+                        "required": true,
+                        "type": "string",
+                        "description": ""
+                    },
+                    {
+                        "name": "gifTitle",
+                        "in": "formData",
+                        "required": true,
+                        "type": "string",
+                        "description": ""
+                    },
+                    {
+                        "name": "gifAuthorId",
+                        "in": "formData",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int32",
+                        "description": ""
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "gif image successfully posted",
+                        "headers": {}
+                    },
+                    "403": {
+                        "description": "incorrect token",
+                        "headers": {}
+                    },
+                    "400": {
+                        "description": "all input fields are required",
+                        "headers": {}
+                    }
+                }
+            }
+        },
+        "/gifs/3": {
+            "delete": {
+                "description": "an authorized user can delete his or her gif",
+                "summary": "delete a gif",
+                "tags": [
+                    "Gif"
+                ],
+                "operationId": "Gifs3Delete",
+                "deprecated": false,
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": false,
+                        "default": "Bearer {token}",
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "gif post successfully deleted",
+                        "headers": {}
+                    },
+                    "403": {
+                        "description": "incorrect token",
+                        "headers": {}
+                    }
+                }
+            }
+        },
+        "/articles/1/comment": {
+            "post": {
+                "description": "all authorized users can comment on articles",
+                "summary": "article comment",
+                "tags": [
+                    "Comment"
+                ],
+                "operationId": "Articles1CommentPost",
+                "deprecated": false,
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": false,
+                        "default": "Bearer {token}",
+                        "type": "string"
+                    },
+                    {
+                        "name": "Content-Type",
+                        "in": "header",
+                        "required": true,
+                        "type": "string",
+                        "description": ""
+                    },
+                    {
+                        "name": "Body",
+                        "in": "body",
+                        "required": true,
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/articlecommentrequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Comment successfully created",
+                        "headers": {}
+                    },
+                    "403": {
+                        "description": "incorrect token",
+                        "headers": {}
+                    },
+                    "400": {
+                        "description": "all input fields are required",
+                        "headers": {}
+                    }
+                }
+            }
+        },
+        "/gifs/1/comment": {
+            "post": {
+                "description": "all authorized users can comment on gifs",
+                "summary": "gif comment",
+                "tags": [
+                    "Comment"
+                ],
+                "operationId": "Gifs1CommentPost",
+                "deprecated": false,
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": false,
+                        "default": "Bearer {token}",
+                        "type": "string"
+                    },
+                    {
+                        "name": "Content-Type",
+                        "in": "header",
+                        "required": true,
+                        "type": "string",
+                        "description": ""
+                    },
+                    {
+                        "name": "Body",
+                        "in": "body",
+                        "required": true,
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/gifcommentrequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Comment successfully created",
+                        "headers": {}
+                    },
+                    "403": {
+                        "description": "incorrect token",
+                        "headers": {}
+                    },
+                    "400": {
+                        "description": "all input fields are required",
+                        "headers": {}
+                    }
+                }
+            }
+        },
+        "/feed": {
+            "get": {
+                "description": "users can see all articles and gifs",
+                "summary": "get all articles and gifs",
+                "tags": [
+                    "Feed"
+                ],
+                "operationId": "FeedGet",
+                "deprecated": false,
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": false,
+                        "default": "Bearer {token}",
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "success",
+                        "headers": {}
+                    },
+                    "403": {
+                        "description": "incorrect token",
+                        "headers": {}
+                    }
+                }
+            }
+        },
+        "/gifs/1": {
+            "get": {
+                "description": "user can view a single gif",
+                "summary": "get a single gif",
+                "tags": [
+                    "Gif"
+                ],
+                "operationId": "Gifs1Get",
+                "deprecated": false,
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": false,
+                        "default": "Bearer {token}",
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "success",
+                        "headers": {}
+                    },
+                    "403": {
+                        "description": "incorrect token",
+                        "headers": {}
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "signupusersrequest": {
+            "title": "signUp",
+            "example": {
+                "firstName": "mohammed",
+                "lastName": "ibrahim",
+                "email": "damilolaibrahim@gmail.com",
+                "password": "ibrahim",
+                "gender": "male",
+                "jobRole": "junior fullstack developer",
+                "department": "Developer",
+                "address": "78, adexson street Akesan Lagos"
+            },
+            "type": "object",
+            "properties": {
+                "firstName": {
+                    "type": "string"
+                },
+                "lastName": {
+                    "type": "string"
+                },
+                "email": {
+                    "type": "string"
+                },
+                "password": {
+                    "type": "string"
+                },
+                "gender": {
+                    "type": "string"
+                },
+                "jobRole": {
+                    "type": "string"
+                },
+                "department": {
+                    "type": "string"
+                },
+                "address": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "firstName",
+                "lastName",
+                "email",
+                "password",
+                "gender",
+                "jobRole",
+                "department",
+                "address"
+            ]
+        },
+        "logininauserrequest": {
+            "title": "logIn",
+            "example": {
+                "email": "ibrahimdamy7@gmail.com",
+                "password": "ibrahim"
+            },
+            "type": "object",
+            "properties": {
+                "email": {
+                    "type": "string"
+                },
+                "password": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "email",
+                "password"
+            ]
+        },
+        "createarticlerequest": {
+            "title": "createArticle",
+            "example": {
+                "title": "my first official project",
+                "article": "i was an intern at Hotels.ng. i worked with different teams and was assigned to different projects. it was a great experience to be a part of HNG internship 6.",
+                "authorId": 18
+            },
+            "type": "object",
+            "properties": {
+                "title": {
+                    "type": "string"
+                },
+                "article": {
+                    "type": "string"
+                },
+                "authorId": {
+                    "type": "integer",
+                    "format": "int32"
+                }
+            },
+            "required": [
+                "title",
+                "article",
+                "authorId"
+            ]
+        },
+        "ModifyanarticleRequest": {
+            "title": "ModifyArticle",
+            "example": {
+                "title": "my first official project",
+                "article": "i was an intern at Hotels.ng. i worked with different teams and was assigned to different projects. it was a great experience to be a part of HNG internship 6, in 2019",
+                "authorId": 18
+            },
+            "type": "object",
+            "properties": {
+                "title": {
+                    "type": "string"
+                },
+                "article": {
+                    "type": "string"
+                },
+                "authorId": {
+                    "type": "integer",
+                    "format": "int32"
+                }
+            },
+            "required": [
+                "title",
+                "article",
+                "authorId"
+            ]
+        },
+        "articlecommentrequest": {
+            "title": "articleComment",
+            "example": {
+                "comment": "nice article. keep it up",
+                "authorId": 1
+            },
+            "type": "object",
+            "properties": {
+                "comment": {
+                    "type": "string"
+                },
+                "authorId": {
+                    "type": "integer",
+                    "format": "int32"
+                }
+            },
+            "required": [
+                "comment",
+                "authorId"
+            ]
+        },
+        "gifcommentrequest": {
+            "title": "gifcomment",
+            "example": {
+                "comment": "what a funny gif",
+                "authorId": 1
+            },
+            "type": "object",
+            "properties": {
+                "comment": {
+                    "type": "string"
+                },
+                "authorId": {
+                    "type": "integer",
+                    "format": "int32"
+                }
+            },
+            "required": [
+                "comment",
+                "authorId"
+            ]
+        }
+    },
+    "tags": [
+        {
+            "name": "Register",
+            "description": "This collection of API signup and log in users"
+        },
+        {
+            "name": "Article",
+            "description": "This collection of API enable authenticated users to post, modify and delete articles"
+        },
+        {
+            "name": "Gif",
+            "description": "This collection of API enable authenticated users to post and delete gifs"
+        },
+        {
+            "name": "Comment",
+            "description": "This collection of API enable authenticated users to comment on article and gifs"
+        },
+        {
+            "name": "Feed",
+            "description": "This API enable authenticated users to see all article and gif history"
+        }
+    ]
+}

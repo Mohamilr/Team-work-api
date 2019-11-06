@@ -8,7 +8,7 @@ import app from '../server';
 chai.use(chaiHttp);
 chai.should();
 
-describe.skip('POST comment', () => {
+describe('POST comment', () => {
     // test article comment
     describe('POST article comment', () => {
         const id = 1;
@@ -17,7 +17,7 @@ describe.skip('POST comment', () => {
         it('should give an error on empty body values', (done) => {
             chai.request(app)
                 .post(`api/v1/articles/${id}/comment`)
-                .set('Authorization', `bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im1vaGFtbWVkIiwicGFzc3dvcmQiOiJpYnJhaGltIiwiaWF0IjoxNTcyODc1ODk2LCJleHAiOjE1NzI5NjIyOTZ9.Xd1C7c4T4DrQY5hZV0-J7dNmH1ioqwuH-956yDLMLlE`)
+                .set('Authorization', `bearer ${process.env.TEST_TOKEN}`)
                 .send({
                     comment: '',
                     authorId: 1
@@ -49,7 +49,7 @@ describe.skip('POST comment', () => {
         it('should post an article comment', (done) => {
             chai.request(app)
                 .post(`api/v1/articles/${id}/comment`)
-                .set('Authorization', `bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im1vaGFtbWVkIiwicGFzc3dvcmQiOiJpYnJhaGltIiwiaWF0IjoxNTcyODc1ODk2LCJleHAiOjE1NzI5NjIyOTZ9.Xd1C7c4T4DrQY5hZV0-J7dNmH1ioqwuH-956yDLMLlE`)
+                .set('Authorization', `bearer ${process.env.TEST_TOKEN}`)
                 .send({
                     comment: 'nice article.',
                     authorId: 1
@@ -71,7 +71,7 @@ describe.skip('POST comment', () => {
         it('should give an error on empty body values', (done) => {
             chai.request(app)
                 .post(`/api/v1/gifs/${id}/comment`)
-                .set('Authorization', `bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im1vaGFtbWVkIiwicGFzc3dvcmQiOiJpYnJhaGltIiwiaWF0IjoxNTcyODc1ODk2LCJleHAiOjE1NzI5NjIyOTZ9.Xd1C7c4T4DrQY5hZV0-J7dNmH1ioqwuH-956yDLMLlE`)
+                .set('Authorization', `bearer ${process.env.TEST_TOKEN}`)
                 .send({
                     comment: '',
                     authorId: 1
@@ -104,7 +104,7 @@ describe.skip('POST comment', () => {
         it('should post a gif comment', (done) => {
             chai.request(app)
                 .post(`/api/v1/gifs/${id}/comment`)
-                .set('Authorization', `bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im1vaGFtbWVkIiwicGFzc3dvcmQiOiJpYnJhaGltIiwiaWF0IjoxNTcyODc1ODk2LCJleHAiOjE1NzI5NjIyOTZ9.Xd1C7c4T4DrQY5hZV0-J7dNmH1ioqwuH-956yDLMLlE`)
+                .set('Authorization', `bearer ${process.env.TEST_TOKEN}`)
                 .send({
                     comment: 'what a funny gif.',
                     authorId: 1

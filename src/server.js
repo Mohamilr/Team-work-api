@@ -2,6 +2,7 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import dotenv from 'dotenv';
 import fileUpload from 'express-fileupload';
+import swaggerUi from 'swagger-ui-express';
 
 // routers
 import userRouter from './routes/register.route';
@@ -10,6 +11,9 @@ import gifRouter from './routes/gif.route';
 import getRouter from './routes/get.route';
 import commentRouter from './routes/comment.route';
 
+// swagger documentation
+import swaggerDocs from '../swagger.json'
+ 
 dotenv.config();
 
 const app = express();
@@ -30,6 +34,9 @@ app.use('/api/v1/', articleRouter);
 app.use('/api/v1', gifRouter);
 app.use('/api/v1', getRouter);
 app.use('/api/v1/', commentRouter);
+
+// swagger route
+app.use('/api/v1/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs))
 
 // wronge routes
 app.use('*', (req, res) => {

@@ -15,7 +15,7 @@ describe.skip('gif route', () => {
         it('should give error on empty body value', (done) => {
             chai.request(app)
                 .post('/api/v1/gifs')
-                .set('Authorization', `bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im1vaGFtbWVkIiwicGFzc3dvcmQiOiJpYnJhaGltIiwiaWF0IjoxNTcyODc1ODk2LCJleHAiOjE1NzI5NjIyOTZ9.Xd1C7c4T4DrQY5hZV0-J7dNmH1ioqwuH-956yDLMLlE`)
+                .set('Authorization', `bearer ${process.env.TEST_TOKEN}`)
                 .attach('gif', fs.readFileSync('c:/Users/DAMILOLA/Desktop/DevCWithAndela/gif.gif'), 'gif.gif')
                 .field('gifTitle', '')
                 .field('gifAuthorId', 1)
@@ -45,7 +45,7 @@ describe.skip('gif route', () => {
         it('should post a gif', (done) => {
             chai.request(app)
                 .post('/api/v1/gifs')
-                .set('Authorization', `bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im1vaGFtbWVkIiwicGFzc3dvcmQiOiJpYnJhaGltIiwiaWF0IjoxNTcyODc1ODk2LCJleHAiOjE1NzI5NjIyOTZ9.Xd1C7c4T4DrQY5hZV0-J7dNmH1ioqwuH-956yDLMLlE`)
+                .set('Authorization', `bearer ${process.env.TEST_TOKEN}`)
                 .attach('gif', fs.readFileSync('c:/Users/DAMILOLA/Desktop/DevCWithAndela/gif.gif'), 'gif.gif')
                 .field('gifTitle', 'my gif')
                 .field('gifAuthorId', 1)
@@ -78,7 +78,7 @@ describe.skip('gif route', () => {
         it('should delete a selected gif', (done) => {
             chai.request(app)
                 .delete(`/api/v1/gifs/${id}`)
-                .set('Authorization', `bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im1vaGFtbWVkIiwicGFzc3dvcmQiOiJpYnJhaGltIiwiaWF0IjoxNTcyODc1ODk2LCJleHAiOjE1NzI5NjIyOTZ9.Xd1C7c4T4DrQY5hZV0-J7dNmH1ioqwuH-956yDLMLlE`)
+                .set('Authorization', `bearer ${process.env.TEST_TOKEN}`)
                 .end((err, res) => {
                     res.should.have.status(200);
                     res.body.should.be.a('object');
