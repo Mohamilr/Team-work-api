@@ -33,7 +33,7 @@ describe('articles', () => {
         it('should give error on empty body values', (done) => {
             chai.request(app)
                 .post('/api/v1/articles')
-                .set('Authorization', `bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im1vaGFtbWVkIiwicGFzc3dvcmQiOiJpYnJhaGltIiwiaWF0IjoxNTcyOTUzMTczLCJleHAiOjE1NzMwMzk1NzN9.-ULN0A6ch9baM-4_CosmQEp1fcDhXwDeikrDWmGRZww`)
+                .set('Authorization', `bearer ${process.env.TEST_TOKEN}`)
                 .send({
                     title: 'my first official project',
                     article: '',
@@ -50,7 +50,7 @@ describe('articles', () => {
         it('should create a new article', (done) => {
             chai.request(app)
                 .post('/api/v1/articles')
-                .set('Authorization', `bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im1vaGFtbWVkIiwicGFzc3dvcmQiOiJpYnJhaGltIiwiaWF0IjoxNTcyOTUzMTczLCJleHAiOjE1NzMwMzk1NzN9.-ULN0A6ch9baM-4_CosmQEp1fcDhXwDeikrDWmGRZww`)
+                .set('Authorization', `bearer ${process.env.TEST_TOKEN}`)
                 .send({
                     title: 'my first official project',
                     article: 'i was an intern at Hotels.ng. i worked with different teams and was assigned to different projects. it was a great experience to be a part of HNG internship 6.',
@@ -90,7 +90,7 @@ describe('articles', () => {
         it('should modify an article', (done) => {
             chai.request(app)
                 .patch(`/api/v1/articles/${id}`)
-                .set('Authorization', `bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im1vaGFtbWVkIiwicGFzc3dvcmQiOiJpYnJhaGltIiwiaWF0IjoxNTcyOTUzMTczLCJleHAiOjE1NzMwMzk1NzN9.-ULN0A6ch9baM-4_CosmQEp1fcDhXwDeikrDWmGRZww`)
+                .set('Authorization', `bearer ${process.env.TEST_TOKEN}`)
                 .send({
                     title: 'vacation',
                     article: 'i was an intern at Hotels.ng. i worked with different teams and was assigned to different projects. it was a great experience to be a part of HNG internship 6.'
@@ -123,7 +123,7 @@ describe('articles', () => {
         it('should delete an article', (done) => {
             chai.request(app)
                 .delete(`/api/v1/articles/${id}`)
-                .set('Authorization', `bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im1vaGFtbWVkIiwicGFzc3dvcmQiOiJpYnJhaGltIiwiaWF0IjoxNTcyOTUzMTczLCJleHAiOjE1NzMwMzk1NzN9.-ULN0A6ch9baM-4_CosmQEp1fcDhXwDeikrDWmGRZww`)
+                .set('Authorization', `bearer ${process.env.TEST_TOKEN}`)
                 .end((err, res) => {
                     res.should.have.status(200);
                     res.body.should.be.a('object');

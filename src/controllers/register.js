@@ -77,6 +77,7 @@ const register = {
                     jwt.sign({ email, password}, process.env.SECRET_KEY, {expiresIn : '24h'}, (err, token) => {
                      res.status(201).json({
                          status: 'success',
+                         message: 'user successfully loged in',
                          data : {
                              token,
                              authorId: logInQuery.rows[0].authorid
