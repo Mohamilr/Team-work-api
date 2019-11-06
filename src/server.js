@@ -28,6 +28,25 @@ app.use(fileUpload({
     useTempFiles: true
 }))
 
+// cors
+app.use((req, res, next) => {
+    res.setHeader('Access-Control-Allow-Origin', '*');
+
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PATCH, DELETE');
+
+    res.setHeader('Access-Control-Allow-Headers', 'Origin, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers,Authorization')
+
+    next();
+})
+
+// welcome route
+app.use('/', (req, res) => {
+    res.status(200).json(({
+        status: 'success',
+        message: 'welcome to the team work api'
+    }))
+})
+
 // app router
 app.use('/api/v1/', userRouter);
 app.use('/api/v1/', articleRouter);
@@ -37,14 +56,6 @@ app.use('/api/v1/', commentRouter);
 
 // swagger route
 app.use('/api/v1/docs', swaggerUi.serve, swaggerUi.setup(apiDocs))
-
-// welcome route
-app.use('/', (req, res) => {
-    res.status(200).json(({
-        status: 'success',
-        message: 'welcome to the team work api'
-    }))
-})
 
 // wronge routes
 app.use('*', (req, res) => {
