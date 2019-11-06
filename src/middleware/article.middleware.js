@@ -2,7 +2,7 @@ const articleCheck = {
     checkPost_ModifyArticle (req, res ,next) {
         const { title, article } = req.body;
 
-        if (title.length < 5) {
+        if (title.length < 3) {
             return res.status(400).json({
                 status: 'error',
                 error: 'title input length should be more than five'
