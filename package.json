@@ -3,8 +3,15 @@
   "version": "1.0.0",
   "description": "Teamwork is an internal social network for employees of an organization. The goal of this application is to facilitate more interaction between colleagues and promote team bonding.",
   "main": "server.js",
+  "engines": {
+    "node": "10.16.1"
+  },
   "scripts": {
-    "start": "nodemon --exec babel-node src/server.js",
+    "clean": "rm -rf build && mkdir build",
+    "build-babel": "babel -d ./build ./src -s",
+    "build": "npm run clean && npm run build-babel",
+    "start": "npm run build && node ./build/src/server.js",
+    "start-dev": "nodemon --exec babel-node src/server.js",
     "test": "nyc mocha --require @babel/register --require @babel/polyfill src/test --exit",
     "coverage": "nyc report --reporter=text-lcov | coveralls"
   },
