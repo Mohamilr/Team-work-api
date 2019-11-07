@@ -3,6 +3,7 @@ import bodyParser from 'body-parser';
 import dotenv from 'dotenv';
 import fileUpload from 'express-fileupload';
 import swaggerUi from 'swagger-ui-express';
+import cors from 'cors';
 
 // routers
 import userRouter from './routes/register.route';
@@ -16,7 +17,11 @@ import apiDocs from '../swagger.json'
  
 dotenv.config();
 
+// instantiate express
 const app = express();
+
+// configure cors
+app.use(cors());
 
 const port = process.env.PORT || 3000;
 
@@ -27,6 +32,15 @@ app.use(bodyParser.json({ extended : true }));
 app.use(fileUpload({
     useTempFiles: true
 }))
+
+app.use((req, res, next) => {
+    res.setHeader('Access-Control-Allow-Origin', '*')
+
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PATCH, DELETE')
+
+    res.setHeader('Access-Control-Allow-Headers', 'Origin, Content-Type, Authorization')
+    next();
+})
 
 // app router
 app.use('/api/v1/', userRouter);
