@@ -10,7 +10,7 @@
     "clean": "rm -rf build && mkdir build",
     "build-babel": "babel -d ./build ./src -s",
     "build": "npm run clean && npm run build-babel",
-    "start": "npm run build && node ./build/src/server.js",
+    "start": "npm run build && node ./build/server.js",
     "start-dev": "nodemon --exec babel-node src/server.js",
     "test": "nyc mocha --require @babel/register --require @babel/polyfill src/test --exit",
     "coverage": "nyc report --reporter=text-lcov | coveralls"
@@ -32,12 +32,6 @@
   },
   "homepage": "https://github.com/Mohamilr/Team-work-api#readme",
   "dependencies": {
-    "@babel/cli": "^7.6.4",
-    "@babel/core": "^7.6.4",
-    "@babel/node": "^7.6.3",
-    "@babel/plugin-transform-runtime": "^7.6.2",
-    "@babel/polyfill": "^7.6.0",
-    "@babel/preset-env": "^7.6.3",
     "bcrypt": "^3.0.6",
     "body-parser": "^1.19.0",
     "cloudinary": "^1.16.0",
@@ -49,6 +43,13 @@
     "pg": "^7.12.1"
   },
   "devDependencies": {
+    "@babel/cli": "^7.6.4",
+    "@babel/core": "^7.6.4",
+    "@babel/node": "^7.6.3",
+    "@babel/polyfill": "^7.6.0",
+    "@babel/preset-env": "^7.6.3",
+    "@babel/plugin-transform-runtime": "^7.6.2",
+    "@babel/runtime": "^7.7.2",
     "chai": "^4.2.0",
     "chai-http": "^4.3.0",
     "coveralls": "^3.0.7",
