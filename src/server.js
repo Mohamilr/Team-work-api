@@ -53,7 +53,7 @@ app.use('/api/v1/', commentRouter);
 app.use('/api/v1/docs', swaggerUi.serve, swaggerUi.setup(apiDocs))
 
 // welcome route
-app.use('/', (req, res) => {
+app.get('/', (req, res) => {
     res.status(200).json(({
         status: 'success',
         message: 'welcome to the team work api'
@@ -61,7 +61,7 @@ app.use('/', (req, res) => {
 })
 
 // wronge routes
-app.use('*', (req, res) => {
+app.use((req, res) => {
     res.status(404).json({
         status: 'error',
         error: 'wrong route'
