@@ -33,6 +33,7 @@ app.use(fileUpload({
     useTempFiles: true
 }))
 
+
 app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', '*')
 
@@ -49,8 +50,6 @@ app.use('/api/v1', gifRouter);
 app.use('/api/v1', getRouter);
 app.use('/api/v1/', commentRouter);
 
-// swagger route
-app.use('/api/v1/docs', swaggerUi.serve, swaggerUi.setup(apiDocs))
 
 // welcome route
 app.get('/', (req, res) => {
@@ -59,6 +58,16 @@ app.get('/', (req, res) => {
         message: 'welcome to the team work api'
     }))
 })
+
+// app router
+app.use('/api/v1/', userRouter);
+app.use('/api/v1/', articleRouter);
+app.use('/api/v1', gifRouter);
+app.use('/api/v1', getRouter);
+app.use('/api/v1/', commentRouter);
+
+// swagger route
+app.use('/api/v1/docs', swaggerUi.serve, swaggerUi.setup(apiDocs))
 
 // wronge routes
 app.use((req, res) => {
