@@ -21,9 +21,9 @@ const comments = {
                     });
                 }
 
-                // const check = `SELECT * FROM articles WHERE articleid=$1`;
-                // const checkValue = [id];
-                // const checkQuery = await pool.query(check, checkValue);
+                const check = `SELECT * FROM articles WHERE articleid=$1`;
+                const checkValue = [id];
+                const checkQuery = await pool.query(check, checkValue);
 
 
                 const comments = `INSERT INTO article_comments (comment, createdOn, authorId, articleId)
@@ -37,8 +37,8 @@ const comments = {
                     data: {
                         message: 'Comment successfully created',
                         createdOn: commentQuery.rows[0].createdon,
-                        // articleTitle: checkQuery.rows[0].title,
-                        // article: checkQuery.rows[0].article,
+                        articleTitle: checkQuery.rows[0].title,
+                        article: checkQuery.rows[0].article,
                         comment: commentQuery.rows[0].comment
                     }
                 })
@@ -69,9 +69,9 @@ const comments = {
                 } 
 
 
-                // const check = `SELECT * FROM gifs WHERE gifId=$1`;
-                // const checkValue = [id];
-                // const checkQuery = await pool.query(check, checkValue);
+                const check = `SELECT * FROM gifs WHERE gifId=$1`;
+                const checkValue = [id];
+                const checkQuery = await pool.query(check, checkValue);
 
 
                 const comments = `INSERT INTO gif_comments (comment, createdon, authorid, gifid)
@@ -85,7 +85,7 @@ const comments = {
                     data: {
                         message: 'Comment successfully created',
                         createdOn: commentQuery.rows[0].createdon,
-                        // gifTitle: checkQuery.rows[0].title,
+                        gifTitle: checkQuery.rows[0].title,
                         comment: commentQuery.rows[0].comment
                     }
                 })

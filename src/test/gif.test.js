@@ -1,6 +1,6 @@
 import chai from 'chai';
 import chaiHttp from 'chai-http';
-import fs from 'fs';
+import path from 'path';
 
 import app from '../server';
 
@@ -10,13 +10,13 @@ chai.should();
 
 describe('gif route', () => {
     // test POST
-    describe.skip('create gif', () => {
+    describe('create gif', () => {
         // error on empty body value
         it('should give error on empty body value', (done) => {
             chai.request(app)
                 .post('/api/v1/gifs')
                 .set('Authorization', `bearer ${process.env.TEST_TOKEN}`)
-                .attach('gif', fs.readFileSync('c:/Users/DAMILOLA/Desktop/DevCWithAndela/gif.gif'), 'gif.gif')
+                .attach('gif', path.join(__dirname, './test-images/gif.gif'), 'gif.gif')
                 .field('gifTitle', '')
                 .field('gifAuthorId', 1)
                 .end((err, res) => {
@@ -31,7 +31,7 @@ describe('gif route', () => {
             chai.request(app)
                 .post('/api/v1/gifs')
                 .set('Authorization', `bearer wrong token`)
-                .attach('gif', fs.readFileSync('c:/Users/DAMILOLA/Desktop/DevCWithAndela/gif.gif'), 'gif.gif')
+                .attach('gif', path.join(__dirname, './test-images/gif.gif'), 'gif.gif')
                 .field('gifTitle', 'my gif')
                 .field('gifAuthorId', 1)
                 .end((err, res) => {
@@ -46,7 +46,7 @@ describe('gif route', () => {
             chai.request(app)
                 .post('/api/v1/gifs')
                 .set('Authorization', `bearer ${process.env.TEST_TOKEN}`)
-                .attach('gif', fs.readFileSync('c:/Users/DAMILOLA/Desktop/DevCWithAndela/gif.gif'), 'gif.gif')
+                .attach('gif', path.join(__dirname, './test-images/gif.gif'), 'gif.gif')
                 .field('gifTitle', 'my gif')
                 .field('gifAuthorId', 1)
                 .end((err, res) => {

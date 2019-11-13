@@ -1,19 +1,19 @@
 import chai from 'chai';
 import chaiHttp from 'chai-http';
-import fs from 'fs';
+import path from 'path';
 
 import app from '../server';
 
 chai.use(chaiHttp);
 chai.should();
 
-describe.skip('create gif', () => {
+describe('create gif', () => {
     // 
     it('should give error if image is not .gif', (done) => {
         chai.request(app)
             .post('/api/v1/gifs')
             .set('Authorization', `bearer ${process.env.TEST_TOKEN}`)
-            .attach('gif', fs.readFileSync('c:/Users/DAMILOLA/Desktop/DevCWithAndela/122.jpg'), '122.jpg')
+            .attach('gif', path.join(__dirname, './test-images/image.jpg') , 'image.jpg')
             .field('gifTitle', 'my funny gif')
             .field('gifAuthorId', 1)
             .end((err, res) => {
