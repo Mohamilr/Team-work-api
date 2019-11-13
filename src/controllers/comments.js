@@ -2,7 +2,7 @@ import jwt from 'jsonwebtoken';
 import pool from '../models/database';
 
 const comments = {
-    articleComment (req, res) {
+    async articleComment (req, res) {
         const id = parseInt(req.params.id)
         const { comment, authorId } = req.body;
         try {
@@ -21,12 +21,12 @@ const comments = {
                     });
                 }
 
-                const check = `SELECT * FROM articles WHERE articleid=$1`;
-                const checkValue = [id];
-                const checkQuery = await pool.query(check, checkValue);
+                // const check = `SELECT * FROM articles WHERE articleid=$1`;
+                // const checkValue = [id];
+                // const checkQuery = await pool.query(check, checkValue);
 
 
-                const comments = `INSERT INTO article_comments (comment, createdon, authorid, articleid)
+                const comments = `INSERT INTO article_comments (comment, createdOn, authorId, articleId)
                                 VALUES($1, $2, $3, $4) RETURNING *`;
                 const values = [comment, new Date().toLocaleString(), authorId, id];
                 const commentQuery = await pool.query(comments, values);
@@ -37,8 +37,8 @@ const comments = {
                     data: {
                         message: 'Comment successfully created',
                         createdOn: commentQuery.rows[0].createdon,
-                        articleTitle: checkQuery.rows[0].title,
-                        article: checkQuery.rows[0].article,
+                        // articleTitle: checkQuery.rows[0].title,
+                        // article: checkQuery.rows[0].article,
                         comment: commentQuery.rows[0].comment
                     }
                 })
@@ -48,7 +48,7 @@ const comments = {
             console.log(e)
         }
     },
-    gifComment (req, res) {
+    async gifComment (req, res) {
         const id = parseInt(req.params.id)
         const { comment, authorId } = req.body;
         try {
@@ -69,9 +69,9 @@ const comments = {
                 } 
 
 
-                const check = `SELECT * FROM gifs WHERE gifId=$1`;
-                const checkValue = [id];
-                const checkQuery = await pool.query(check, checkValue);
+                // const check = `SELECT * FROM gifs WHERE gifId=$1`;
+                // const checkValue = [id];
+                // const checkQuery = await pool.query(check, checkValue);
 
 
                 const comments = `INSERT INTO gif_comments (comment, createdon, authorid, gifid)
@@ -85,7 +85,7 @@ const comments = {
                     data: {
                         message: 'Comment successfully created',
                         createdOn: commentQuery.rows[0].createdon,
-                        gifTitle: checkQuery.rows[0].title,
+                        // gifTitle: checkQuery.rows[0].title,
                         comment: commentQuery.rows[0].comment
                     }
                 })
