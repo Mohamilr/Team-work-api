@@ -1,5 +1,5 @@
 [![Build Status](https://travis-ci.org/Mohamilr/Team-work-api.svg?branch=develop-1)](https://travis-ci.org/Mohamilr/Team-work-api)
-[![Coverage Status](https://coveralls.io/repos/github/Mohamilr/Team-work-api/badge.svg?branch=develop-1)](https://coveralls.io/github/Mohamilr/Team-work-api?branch=develop-1)
+[![Coverage Status](https://coveralls.io/repos/github/Mohamilr/Team-work-api/badge.svg?branch=gif-upload-test)](https://coveralls.io/github/Mohamilr/Team-work-api?branch=gif-upload-test)
 [![Maintainability](https://api.codeclimate.com/v1/badges/9a0836beb80bb51e3120/maintainability)](https://codeclimate.com/github/Mohamilr/Team-work-api/maintainability)
 
 # Team-work-api
