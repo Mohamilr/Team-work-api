@@ -69,8 +69,8 @@ const articleCommentTable = async () => {
         createdOn VARCHAR(50) NOT NULL,
         authorId INT NOT NULL,
         articleId INT NOT NULL,
-        FOREIGN KEY(articleId) REFERENCES articles(articleId) ON UPDATE CASCADE ON DELETE CASCADE,
-        FOREIGN KEY(authorId) REFERENCES employee(authorId) ON UPDATE CASCADE ON DELETE CASCADE
+        FOREIGN KEY(articleId) REFERENCES articles(articleId),
+        FOREIGN KEY(authorId) REFERENCES employee(authorId)
     )`;
 
     try{
@@ -110,9 +110,9 @@ const gifCommentTable = async () => {
         commentId SERIAL PRIMARY KEY NOT NULL UNIQUE,
         comment VARCHAR(300) NOT NULL,
         createdOn VARCHAR(50) NOT NULL,
-        authorId INTEGER,
-        gifId INT,
-        FOREIGN KEY(gifId) REFERENCES gifs(gifId) ON UPDATE CASCADE ON DELETE CASCADE,
+        authorId INT NOT NULL,
+        gifId INT NOT NULL,
+        FOREIGN KEY(gifId) REFERENCES gifs(gifId),
         FOREIGN KEY(authorId) REFERENCES employee(authorId) 
     )`
 

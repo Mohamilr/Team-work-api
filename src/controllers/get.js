@@ -56,6 +56,7 @@ const get = {
                 res.status(200).json({
                     status: 'success',
                     data: {
+                        commentCount: comment.rowCount,
                         id: getSingleArticleQuery.rows[0].articleid,
                         createdOn: getSingleArticleQuery.rows[0].createdon,
                         title: getSingleArticleQuery.rows[0].title,
@@ -90,6 +91,7 @@ const get = {
                 res.status(200).json({
                     status: 'success',
                     data: {
+                        commentCount: comments.rowCount,
                         id: getSingleGifQuery.rows[0].gifid,
                         createdOn: getSingleGifQuery.rows[0].gifcreatedon,
                         title: getSingleGifQuery.rows[0].giftitle,

@@ -25,7 +25,7 @@ Teamwork is an internal social network for employees of an organization. The goa
 * ```yourhost/api/v1/docs```
 
 ### License
-This project is licensed under the MIT License 
+MIT License 
 
 
 ## Author

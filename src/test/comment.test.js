@@ -8,15 +8,15 @@ import app from '../server';
 chai.use(chaiHttp);
 chai.should();
 
-describe.skip('POST comment', () => {
+describe('POST comment', () => {
     // test article comment
     describe('POST article comment', () => {
-        const id = 2;
+        const id = 7;
 
         // error on empty body values
         it('should give an error on empty body values', (done) => {
             chai.request(app)
-                .post(`api/v1/articles/${id}/comment`)
+                .post(`/api/v1/articles/${id}/comment`)
                 .set('Authorization', `bearer ${process.env.TEST_TOKEN}`)
                 .send({
                     comment: '',
@@ -27,12 +27,13 @@ describe.skip('POST comment', () => {
                     res.body.should.be.a('object');
                 })
             done();
+
         })
 
         // error on wrong token
         it('should give an error on wrong token', (done) => {
             chai.request(app)
-                .post(`api/v1/articles/${id}/comment`)
+                .post(`/api/v1/articles/${id}/comment`)
                 .set('Authorization', `bearer wrong token`)
                 .send({
                     comment: 'nice article.',
@@ -48,7 +49,7 @@ describe.skip('POST comment', () => {
         // post a comment
         it('should post an article comment', (done) => {
             chai.request(app)
-                .post(`api/v1/articles/${id}/comment`)
+                .post(`/api/v1/articles/${id}/comment`)
                 .set('Authorization', `bearer ${process.env.TEST_TOKEN}`)
                 .send({
                     comment: 'nice article.',
