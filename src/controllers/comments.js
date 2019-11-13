@@ -2,7 +2,7 @@ import jwt from 'jsonwebtoken';
 import pool from '../models/database';
 
 const comments = {
-    articleComment (req, res) {
+    async articleComment (req, res) {
         const id = parseInt(req.params.id)
         const { comment, authorId } = req.body;
         try {
@@ -26,7 +26,7 @@ const comments = {
                 const checkQuery = await pool.query(check, checkValue);
 
 
-                const comments = `INSERT INTO article_comments (comment, createdon, authorid, articleid)
+                const comments = `INSERT INTO article_comments (comment, createdOn, authorId, articleId)
                                 VALUES($1, $2, $3, $4) RETURNING *`;
                 const values = [comment, new Date().toLocaleString(), authorId, id];
                 const commentQuery = await pool.query(comments, values);
@@ -48,7 +48,7 @@ const comments = {
             console.log(e)
         }
     },
-    gifComment (req, res) {
+    async gifComment (req, res) {
         const id = parseInt(req.params.id)
         const { comment, authorId } = req.body;
         try {

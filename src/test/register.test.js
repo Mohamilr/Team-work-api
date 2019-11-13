@@ -62,7 +62,7 @@ describe('POST register', () => {
                 .send({
                     firstName: 'mohammed',
                     lastName: 'ibrahim',
-                    email: 'ibraui@gmail.com',
+                    email: 'mohammed@gmail.com',
                     password: 'administrator',
                     gender: 'male',
                     jobRole: 'assistant',
@@ -117,8 +117,8 @@ describe('POST register', () => {
             chai.request(app)
                 .post('/api/v1/auth/signin')
                 .send({
-                    email: 'mohammed',
-                    password: 'ibrahim'
+                    email: 'ibraheem@gmail.com',
+                    password: 'administrator',
                 })
                 .end((err, res) => {
                     res.should.have.status(201);
@@ -134,8 +134,8 @@ describe('POST register', () => {
             chai.request(app)
                 .post('/api/v1/auth/signin')
                 .send({
-                    email: 'new',
-                    password: 'bypass'
+                    email: 'ibraheem@gmail.com',
+                    password: 'admini',
                 })
                 .end((err, res) => {
                     res.should.have.status(403);
