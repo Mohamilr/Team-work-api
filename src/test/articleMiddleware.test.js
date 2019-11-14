@@ -10,7 +10,7 @@ describe('articleMiddleware', () => {
     describe('POST and PATCH', () => {
         const id = 1;
         // post
-        it('should give an error if title length is less than 5', (done) => {
+        it('should give an error if title length is less than 5 characters', (done) => {
             chai.request(app)
             .post('/api/v1/articles')
             .set('Authorization', `bearer ${process.env.TEST_TOKEN}`)
@@ -27,7 +27,7 @@ describe('articleMiddleware', () => {
         })
 
         // 
-        it('should give an error if article length is less than 100', (done) => {
+        it('should give an error if article length is less than 50 characters', (done) => {
             chai.request(app)
             .post('/api/v1/articles')
             .set('Authorization', `bearer ${process.env.TEST_TOKEN}`)
@@ -44,7 +44,7 @@ describe('articleMiddleware', () => {
         })
 
         // patch
-        it('should give an error if input length is less than 5', (done) => {
+        it('should give an error if title length is less than 5 characters', (done) => {
             chai.request(app)
             .patch(`/api/v1/articles/${id}`)
             .set('Authorization', `bearer ${process.env.TEST_TOKEN}`)
@@ -61,7 +61,7 @@ describe('articleMiddleware', () => {
         })
 
         // 
-        it('should give an error if input length is less than 5', (done) => {
+        it('should give an error if article length is less than 50 characters', (done) => {
             chai.request(app)
             .patch(`/api/v1/articles/${id}`)
             .set('Authorization', `bearer ${process.env.TEST_TOKEN}`)

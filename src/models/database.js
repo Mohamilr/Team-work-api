@@ -3,6 +3,7 @@ import dotenv from 'dotenv';
 
 dotenv.config();
 
+// connect to database
 const connection = {
     database: process.env.DB_DATABASE,
     user: process.env.DB_USER,
@@ -11,6 +12,7 @@ const connection = {
     port: process.env.DB_PORT
 };
 
+// pool
 const pool = new pg.Pool(connection);
 
 pool.on('connect', () => {})
@@ -60,7 +62,7 @@ const articleTable = async () => {
     }
 };
 
-// // //  article comment table
+// article comment table
 const articleCommentTable = async () => {
     const articleCommentTableQuery = `CREATE TABLE IF NOT EXISTS
     article_comments(
@@ -103,7 +105,7 @@ const gifTable = async () => {
     }
 };
 
-// // // gif comment table
+// gif comment table
 const gifCommentTable = async () => {
     const gifCommentTableQuery = `CREATE TABLE IF NOT EXISTS
     gif_comments(
@@ -150,5 +152,5 @@ gifCommentTable();
 // dropTable
 // dropTable();
 
-
+// export pool to controllers
 export default pool;
