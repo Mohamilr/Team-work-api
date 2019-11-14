@@ -8,11 +8,11 @@
             "email": "ibrahimdamy7@gmail.com"
         }
     },
-    "host": "https://team-work-api.herokuapp.com",
+    "host": "team-work-api.herokuapp.com",
     "basePath": "/api/v1",
     "securityDefinitions": {},
     "schemes": [
-        "http"
+        "http",
         "https"
     ],
     "consumes": [
