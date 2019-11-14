@@ -38,7 +38,7 @@ const register = {
 
                 // generate admin token
                 jwt.sign({ email, password }, process.env.ADMIN_SECRETKEY, { expiresIn: '24h' }, (err, token) => {
-                    res.status(200).json({
+                    res.status(201).json({
                         message: 'admin account successfully created',
                         token,
                         adminId: adminResult.rows[0].authorid
@@ -93,7 +93,7 @@ const register = {
                   // admin login
             if (logInQuery.rows[0].email === process.env.ADMIN_EMAIL && result === true) {
                 jwt.sign({ email, password }, process.env.ADMIN_SECRETKEY, { expiresIn: '24h' }, (err, token) => {
-                    res.status(200).json({
+                    res.status(201).json({
                         status: 'success',
                         message: 'admin successfully loged in',
                          data : {
