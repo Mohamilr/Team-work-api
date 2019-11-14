@@ -75,6 +75,28 @@ describe('POST register', () => {
                 })
             done();
         })
+
+      
+         // Register admin
+         it('should sign up a user', (done) => {
+            chai.request(app)
+                .post('/api/v1/auth/create-user')
+                .send({
+                    firstName: 'mohammed',
+                    lastName: 'ibrahim',
+                    email: process.env.ADMIN_EMAIL,
+                    password: process.env.ADMIN_PASSWORD,
+                    gender: 'male',
+                    jobRole: 'assistant',
+                    department: 'engineer',
+                    address: '4, alomosho'
+                })
+                .end((err, res) => {
+                    res.should.have.status(201);
+                    res.body.should.be.a('object');
+                })
+            done();
+        })
     })
 
 
@@ -127,6 +149,24 @@ describe('POST register', () => {
                 })
             done();
         })
+
+
+        // login admin
+        it('should log in an existing user', (done) => {
+            chai.request(app)
+                .post('/api/v1/auth/signin')
+                .send({
+                    email: process.env.ADMIN_EMAIL,
+                    password: process.env.ADMIN_PASSWORD,
+                })
+                .end((err, res) => {
+                    res.should.have.status(201);
+                    res.body.should.be.a('object');
+                    // token = res.body.data.token
+                })
+            done();
+        })
+
 
 
         // error for incorrect email or password
