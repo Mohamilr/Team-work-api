@@ -21,16 +21,16 @@ describe('GET', () => {
         })
 
         // no feed available
-        // it('should give an error if there are no feeds', (done) => {
-        //     chai.request(app)
-        //     .get('/api/v1/feed')
-        //     .set('Authorization', `bearer ${process.env.TEST_TOKEN}`)
-        //     .end((err, res) => {
-        //         res.should.have.status(400);
-        //         res.body.should.be.a('object');
-        //     })
-        //     done();
-        // })
+        it('should give an error if there are no feeds', (done) => {
+            chai.request(app)
+            .get('/api/v1/feed')
+            .set('Authorization', `bearer ${process.env.TEST_TOKEN}`)
+            .end((err, res) => {
+                res.should.have.status(400);
+                res.body.should.be.a('object');
+            })
+            done();
+        })
 
 
         // get all feeds
