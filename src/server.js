@@ -3,7 +3,7 @@ import bodyParser from 'body-parser';
 import dotenv from 'dotenv';
 import fileUpload from 'express-fileupload';
 import swaggerUi from 'swagger-ui-express';
-// import cors from 'cors';
+import cors from 'cors';
 
 // routers
 import userRouter from './routes/register.route';
@@ -21,7 +21,7 @@ dotenv.config();
 const app = express();
 
 // configure cors
-// app.use(cors());
+app.use(cors());
 
 const port = process.env.PORT || 3000;
 
