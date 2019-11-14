@@ -13,7 +13,7 @@ Teamwork is an internal social network for employees of an organization. The goa
 * git clone ```https://github.com/Mohamilr/Team-work-api.git```
 * cd ```Team-work-api```
 * ```npm install``` to install all dependencies.
-* ```npm run run start-dev```
+* ```npm run run start-dev``` to start the server
 * ```npm run start```  to run build.
 
 ### Tests
