@@ -6,9 +6,6 @@ import app from '../server';
 chai.use(chaiHttp);
 chai.should();
 
-// let signUpToken = null;
-// let token = '';
-
 describe('POST register', () => {
     // error if fields are empty
     describe('POST sign up', () => {
@@ -18,8 +15,8 @@ describe('POST register', () => {
                 .send({
                     firstName: '',
                     lastName: '',
-                    email: 'new usermkmkm',
-                    password: 'admin',
+                    email: 'newuser@gmail.com',
+                    password: 'administrator',
                     gender: 'male',
                     jobRole: 'assistant',
                     department: '',
@@ -38,10 +35,10 @@ describe('POST register', () => {
             chai.request(app)
                 .post('/api/v1/auth/create-user')
                 .send({
-                    firstName: 'mama',
-                    lastName: 'omo',
-                    email: 'mohammed',
-                    password: 'ibrahim',
+                    firstName: 'mohammed',
+                    lastName: 'ibrahim',
+                    email: 'ibrahimdamilola@gmail.com',
+                    password: '123456789',
                     gender: 'male',
                     jobRole: 'assistant',
                     department: 'engineer',
@@ -75,6 +72,28 @@ describe('POST register', () => {
                 })
             done();
         })
+
+      
+         // Register admin
+         it('should sign up a user', (done) => {
+            chai.request(app)
+                .post('/api/v1/auth/create-user')
+                .send({
+                    firstName: 'mohammed',
+                    lastName: 'ibrahim',
+                    email: process.env.ADMIN_EMAIL,
+                    password: process.env.ADMIN_PASSWORD,
+                    gender: 'male',
+                    jobRole: 'assistant',
+                    department: 'engineer',
+                    address: '4, alomosho'
+                })
+                .end((err, res) => {
+                    res.should.have.status(201);
+                    res.body.should.be.a('object');
+                })
+            done();
+        })
     })
 
 
@@ -85,7 +104,7 @@ describe('POST register', () => {
             chai.request(app)
                 .post('/api/v1/auth/signin')
                 .send({
-                    email: 'new usermkmkm',
+                    email: 'ibrahimdamilola@gmail.com',
                     password: ''
                 })
                 .end((err, res) => {
@@ -101,7 +120,7 @@ describe('POST register', () => {
             chai.request(app)
                 .post('/api/v1/auth/signin')
                 .send({
-                    email: 'non existing user',
+                    email: 'nonexistinguser@gmail.com',
                     password: 'password'
                 })
                 .end((err, res) => {
@@ -117,8 +136,8 @@ describe('POST register', () => {
             chai.request(app)
                 .post('/api/v1/auth/signin')
                 .send({
-                    email: 'ibraheem@gmail.com',
-                    password: 'administrator',
+                    email: 'ibrahimdamilola@gmail.com',
+                    password: '123456789',
                 })
                 .end((err, res) => {
                     res.should.have.status(201);
@@ -129,15 +148,33 @@ describe('POST register', () => {
         })
 
 
+        // login admin
+        it('should log in an existing user', (done) => {
+            chai.request(app)
+                .post('/api/v1/auth/signin')
+                .send({
+                    email: process.env.ADMIN_EMAIL,
+                    password: process.env.ADMIN_PASSWORD,
+                })
+                .end((err, res) => {
+                    res.should.have.status(201);
+                    res.body.should.be.a('object');
+                })
+            done();
+        })
+
+
+
         // error for incorrect email or password
         it('should give error for incorrect email or password', (done) => {
             chai.request(app)
                 .post('/api/v1/auth/signin')
                 .send({
-                    email: 'ibraheem@gmail.com',
-                    password: 'admini',
+                    email: 'ibrahimdamilola@gmail.com',
+                    password: 'administer',
                 })
                 .end((err, res) => {
+                    console.log(res)
                     res.should.have.status(403);
                     res.body.should.be.a('object');
                 })
