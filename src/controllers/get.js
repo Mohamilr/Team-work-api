@@ -29,9 +29,7 @@ const get = {
                 // get response
                 res.status(200).json({
                     status: 'success',
-                    data: [
-                        getQuery.rows
-                    ]
+                    data: getQuery.rows
                 });
             });
         }
