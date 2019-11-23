@@ -2,6 +2,7 @@ const gifMiddleware = {
     checkPostGif (req, res, next) {
         let image = req.files.gif;
 
+        // check if image is a gif
         if (!(image.name.match(/.(gif)$/))) {
             return res.status(400).json({
                 status: 'error',
@@ -12,4 +13,5 @@ const gifMiddleware = {
     }
 }
 
+// export gifMiddleware to routes
 export default gifMiddleware;

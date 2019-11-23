@@ -20,6 +20,7 @@ describe('GET', () => {
             done();
         })
 
+        // this test will only pass when there are no gifs or articles available.
         // no feed available
         // it('should give an error if there are no feeds', (done) => {
         //     chai.request(app)
