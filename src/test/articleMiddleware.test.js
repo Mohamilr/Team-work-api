@@ -27,13 +27,13 @@ describe('articleMiddleware', () => {
         })
 
         // 
-        it('should give an error if article length is less than 50 characters', (done) => {
+        it('should give an error if article length is less than 20 characters', (done) => {
             chai.request(app)
             .post('/api/v1/articles')
             .set('Authorization', `bearer ${process.env.TEST_TOKEN}`)
             .send({
                 title: 'my first article',
-                article: 'i was an intern at Hotels.ng.',
+                article: 'i was an intern',
                 authorId: 1
             })
             .end((err, res) => {
@@ -61,13 +61,13 @@ describe('articleMiddleware', () => {
         })
 
         // 
-        it('should give an error if article length is less than 50 characters', (done) => {
+        it('should give an error if article length is less than 20 characters', (done) => {
             chai.request(app)
             .patch(`/api/v1/articles/${id}`)
             .set('Authorization', `bearer ${process.env.TEST_TOKEN}`)
             .send({
                 title: 'my first article',
-                article: 'i was an intern at Hotels.ng. ',
+                article: 'i was an intern',
                 authorId: 1
             })
             .end((err, res) => {

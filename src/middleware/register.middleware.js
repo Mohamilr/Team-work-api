@@ -3,7 +3,7 @@ const registerMiddleware = {
         const { email, password, gender, department, address } = req.body;
 
         // check if email value has @(mail service).com
-        if (!(/[\w]+@[a-zA-Z]+\.com$/.test(email))) {
+        if (!(/[\w]+@[a-zA-Z]+\.[a-zA-Z]{2}/.test(email))) {
             return res.status(400).json({
                 status: 'error',
                 error: 'invalid email format'
@@ -25,19 +25,19 @@ const registerMiddleware = {
             })
         }
 
-        if (department.length < 3) {
-            return res.status(400).json({
-                status: 'error',
-                error: 'department input length should be more than three characters'
-            })
-        }
+        // if (department.length < 3) {
+        //     return res.status(400).json({
+        //         status: 'error',
+        //         error: 'department input length should be more than three characters'
+        //     })
+        // }
 
-        if (address.length < 3) {
-            return res.status(400).json({
-                status: 'error',
-                error: 'address input length should be more than three characters'
-            })
-        }
+        // if (address.length < 3) {
+        //     return res.status(400).json({
+        //         status: 'error',
+        //         error: 'address input length should be more than three characters'
+        //     })
+        // }
         next();
     }
 }

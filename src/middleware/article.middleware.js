@@ -9,10 +9,10 @@ const articleCheck = {
             })
         }
 
-        if (article.length < 50) {
+        if (article.length < 20) {
             return res.status(400).json({
                 status: 'error',
-                error: 'article input length should be more than forty-nine characters'
+                error: 'article input length should be more than nineteen characters'
             })
         }
         next();

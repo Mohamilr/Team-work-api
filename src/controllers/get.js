@@ -15,11 +15,11 @@ const get = {
                 };
 
                 // get all articles and gifs query 
-                const get = `SELECT * FROM articles, gifs `;
-                const getQuery = await pool.query(get);
+                const getArticles = await pool.query(`SELECT * FROM articles`);
+                const getGifs = await pool.query(`SELECT * FROM gifs`)
 
                 // if there are no articles and gif available
-                if (!getQuery.rows[0]) {
+                if (!getArticles.rowCount || !getGifs.rowCount) {
                     return res.status(400).json({
                         status: 'error',
                         error: 'sorry, there are no articles or gifs available in the database'
@@ -29,7 +29,10 @@ const get = {
                 // get response
                 res.status(200).json({
                     status: 'success',
-                    data: getQuery.rows
+                    data: {
+                          articles: getArticles.rows,
+                          gifs: getGifs.rows
+                        }
                 });
             });
         }
