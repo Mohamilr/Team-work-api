@@ -141,26 +141,6 @@ const register = {
         catch (e) {
             console.log(e)
         };
-    },
-    // token verification
-    verifyToken(req, res, next) {
-        // header key and value
-        const headers = req.headers['authorization'];
-
-        if (typeof headers !== 'undefined') {
-            const beareHeader = headers.split(' ');
-            const token = beareHeader[1];
-
-            req.token = token
-            next();
-        }
-        else {
-            // incorrect header and value
-            res.status(403).json({
-                status: 'error',
-                error: 'forbidden'
-            });
-        };
     }
 };
 
