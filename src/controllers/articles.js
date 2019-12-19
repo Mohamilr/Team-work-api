@@ -1,4 +1,3 @@
-import jwt from 'jsonwebtoken';
 import pool from '../models/database';
 import jsonResponse from '../helpers/jsonResponse';
 
@@ -11,7 +10,7 @@ const articleController = {
         try {
             // empty body values
             if (!title || !article || !authorId) {
-                return jsonResponse.error(res, 'error', 400, 'all fields are required')
+                return jsonResponse(res, 'error', 400, 'all fields are required')
             };
 
             // database post article query
@@ -21,7 +20,7 @@ const articleController = {
             const createQuery = await pool.query(create, values);
 
             // article post response
-            return jsonResponse.success(res, 'success', 201, {
+            return jsonResponse(res, 'success', 201, {
                 message: 'Article successfully posted',
                 articleId: createQuery.rows[0].articleid,
                 createdOn: createQuery.rows[0].createdon,
@@ -44,7 +43,7 @@ const articleController = {
             const checkQuery = await pool.query(check, checkValue);
 
             if(!checkQuery.rowCount) {
-                return jsonResponse.error(res, 'error', 404, 'article not found')
+                return jsonResponse(res, 'error', 404, 'article not found')
             }
 
             // body values
@@ -57,7 +56,7 @@ const articleController = {
             const modifyQuery = await pool.query(modify, value)
 
             // update response
-            return jsonResponse.success(res, 'success', 200, {
+            return jsonResponse(res, 'success', 200, {
                 message: 'Article successfully updated',
                 title: title,
                 article: article,
@@ -79,11 +78,11 @@ const articleController = {
             
             // if article id is not found
             if(!removeQuery.rowCount) {
-                return jsonResponse.error(res, 'error', 404, 'article not found')
+                return jsonResponse(res, 'error', 404, 'article not found')
             }
 
             // delete response
-            return jsonResponse.success(res, 'success', 200, 'Article successfully deleted')
+            return jsonResponse(res, 'success', 200, 'Article successfully deleted')
         }
         catch (e) {
             console.log(e);

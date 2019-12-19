@@ -1,5 +1,5 @@
-import jwt from 'jsonwebtoken';
 import pool from '../models/database';
+import jsonResponse from '../helpers/jsonResponse';
 
 // comment controller
 const comments = {
@@ -8,20 +8,10 @@ const comments = {
         const id = parseInt(req.params.id)
         // body values
         const { comment, authorId } = req.body;
-        try {
-            // verify token
-            jwt.verify(req.token, process.env.SECRET_KEY, async (err, data) => {
-                // incorrect token
-                if(err) {
-                    return res.status(403).json({
-                        status: 'error',
-                        error: 'incorrect token'
-                    })
-                }
- 
+        try { 
                 // empty body values
                 if (!comment || !authorId) {
-                    return res.status(400).json({
+                    return jsonResponse(res, 'error', 400, {
                         status: 'error',
                         error: 'all fields are required'
                     });
@@ -39,17 +29,13 @@ const comments = {
                 const commentQuery = await pool.query(comments, values);
                 
                 // comment response
-                res.status(201).json({
-                    status: 'success',
-                    data: {
-                        message: 'Comment successfully created',
-                        createdOn: commentQuery.rows[0].createdon,
-                        articleTitle: checkQuery.rows[0].title,
-                        article: checkQuery.rows[0].article,
-                        comment: commentQuery.rows[0].comment
-                    }
-                })
-            })
+                return jsonResponse(res, 'success', 201, {
+                    message: 'Comment successfully created',
+                    createdOn: commentQuery.rows[0].createdon,
+                    articleTitle: checkQuery.rows[0].title,
+                    article: checkQuery.rows[0].article,
+                    comment: commentQuery.rows[0].comment
+                });
         }
         catch (e) {
             console.log(e)
@@ -61,22 +47,9 @@ const comments = {
         // body values
         const { comment, authorId } = req.body;
         try {
-            // verify token
-            jwt.verify(req.token, process.env.SECRET_KEY, async (err, data) => {
-                 // incorrect token
-                 if(err) {
-                    return res.status(403).json({
-                        status: 'error',
-                        error: 'incorrect token'
-                    })
-                } 
-
                 // empty body values
                 if (!comment || !authorId) {
-                    return res.status(400).json({
-                        status: 'error',
-                        error: 'all fields are required'
-                    });
+                    return jsonResponse(res, 'error', 400, 'all fields are required');
                 };
 
 
@@ -92,23 +65,17 @@ const comments = {
                 const commentQuery = await pool.query(comments, values);
                 
                 // comment response
-                res.status(201).json({
-                    status: 'success',
-                    data: {
-                        message: 'Comment successfully created',
-                        createdOn: commentQuery.rows[0].createdon,
-                        gifTitle: checkQuery.rows[0].title,
-                        comment: commentQuery.rows[0].comment
-                    }
+                return jsonResponse(res, 'success', 201, {
+                    message: 'Comment successfully created',
+                    createdOn: commentQuery.rows[0].createdon,
+                    gifTitle: checkQuery.rows[0].title,
+                    comment: commentQuery.rows[0].comment
                 })
-            })
         }
         catch (e) {
             console.log(e);
         }
     }
-
-
 }
 
 // export comments to routes
