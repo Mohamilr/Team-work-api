@@ -1,6 +1,7 @@
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
 import pool from '../models/database';
+import jsonResponse from '../helpers/jsonResponse';
 
 
 const register = {
@@ -11,7 +12,7 @@ const register = {
         try {
             // empty body values
             if (!firstName || !lastName || !email || !password || !gender || !jobRole || !department || !address) {
-                return res.status(400).json({
+                return jsonResponse(res, 'error', 400, {
                     status: 'error',
                     error: 'all fields are required'
                 });
@@ -29,7 +30,7 @@ const register = {
 
             // check if user exist response
             if (check.rows[0]) {
-                return res.status(400).json({
+                return jsonResponse(res, 'error', 400, {
                     status: 'error',
                     error: 'user already exist'
                 });
@@ -43,7 +44,7 @@ const register = {
 
                 // generate admin token
                 jwt.sign({ email, password }, process.env.SECRET_KEY, { expiresIn: '24h' }, (err, token) => {
-                    res.status(201).json({
+                    return jsonResponse(res, 'success', 201, {
                         message: 'admin account successfully created',
                         token,
                         adminId: adminResult.rows[0].authorid
@@ -60,14 +61,11 @@ const register = {
                 // generate user token
                 jwt.sign({ email, password }, process.env.SECRET_KEY, { expiresIn: '24h' }, (err, token) => {
                     // token response
-                    res.status(201).json({
-                        status: 'success',
-                        data: {
-                            message: 'user account successfully created',
-                            token,
-                            authorId: signUpQuerys.rows[0].authorid
-                        }
-                    })
+                    return jsonResponse(res, 'success', 201, {
+                        message: 'user account successfully created',
+                        token,
+                        authorId: signUpQuerys.rows[0].authorid
+                    });
                 })
             };
         }
@@ -82,7 +80,7 @@ const register = {
         try {
             // empty body values
             if (!email || !password) {
-                return res.status(400).json({
+                return jsonResponse(res, 'error', 400, {
                     status: 'error',
                     error: 'all fields are required'
                 });
@@ -95,10 +93,7 @@ const register = {
 
             // email check response
             if (!logInQuery.rows[0]) {
-                return res.status(400).json({
-                    status: 'error',
-                    error: 'email does not exist, please sign up'
-                });
+                return jsonResponse(res, 'error', 400, 'email does not exist, please sign up')
             };
 
             // compare password
@@ -106,35 +101,26 @@ const register = {
                 // admin login
                 if (logInQuery.rows[0].email === process.env.ADMIN_EMAIL && result === true) {
                     jwt.sign({ email, password }, process.env.SECRET_KEY, { expiresIn: '24h' }, (err, token) => {
-                        res.status(201).json({
-                            status: 'success',
+                        return jsonResponse(res, 'success', 201, {
                             message: 'admin successfully loged in',
-                            data: {
-                                token,
-                                adminId: logInQuery.rows[0].authorid
-                            }
+                            token,
+                            adminId: logInQuery.rows[0].authorid
                         });
                     });
                 }
                 // user login
                 else if (email === logInQuery.rows[0].email && result === true) {
                     jwt.sign({ email, password }, process.env.SECRET_KEY, { expiresIn: '24h' }, (err, token) => {
-                        res.status(201).json({
-                            status: 'success',
+                        return jsonResponse(res, 'success', 201, {
                             message: 'user successfully loged in',
-                            data: {
-                                token,
-                                authorId: logInQuery.rows[0].authorid
-                            }
-                        })
+                            token,
+                            authorId: logInQuery.rows[0].authorid
+                        });
                     })
                 }
                 // incorrect email and password
                 else {
-                    res.status(403).json({
-                        status: 'error',
-                        error: 'token not generated, incorrect email or password'
-                    });
+                    jsonResponse(res, 'error', 403, 'token not generated, incorrect email or password'); 
                 }
             });
         }

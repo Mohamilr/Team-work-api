@@ -26,6 +26,7 @@ const get = {
     async getSingleArticle(req, res) {
         // parameter (number)
         const id = parseInt(req.params.id);
+
         try {
             // select single article query
             const getSingleArticle = `SELECT * FROM articles WHERE articleId=$1`;
@@ -52,6 +53,7 @@ const get = {
     async getSingleGif(req, res) {
         // parameter (number)
         const id = parseInt(req.params.id);
+        
         try {
             // select single gif
             const getSingleGif = `SELECT * FROM gifs WHERE gifId=$1`;

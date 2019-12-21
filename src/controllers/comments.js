@@ -7,10 +7,12 @@ const comments = {
         // parameter (number)
         const id = parseInt(req.params.id)
         // body values
-        const { comment, authorId } = req.body;
+        const comment = req.body;
+        const authorId = req.id;
+
         try { 
                 // empty body values
-                if (!comment || !authorId) {
+                if (!comment) {
                     return jsonResponse(res, 'error', 400, {
                         status: 'error',
                         error: 'all fields are required'
@@ -45,13 +47,14 @@ const comments = {
         // parameter
         const id = parseInt(req.params.id)
         // body values
-        const { comment, authorId } = req.body;
+        const comment = req.body;
+        const authorId = req.id;
+
         try {
                 // empty body values
-                if (!comment || !authorId) {
+                if (!comment) {
                     return jsonResponse(res, 'error', 400, 'all fields are required');
                 };
-
 
                 // select gif query
                 const check = `SELECT * FROM gifs WHERE gifId=$1`;

@@ -5,12 +5,13 @@ import jsonResponse from '../helpers/jsonResponse';
 const articleController = {
     async createArticle(req, res) {
         // body values
-        const { title, article, authorId } = req.body;
+        const { title, article } = req.body;
+        const authorId = req.id;
 
         try {
             // empty body values
-            if (!title || !article || !authorId) {
-                return jsonResponse(res, 'error', 400, 'all fields are required')
+            if (!title || !article) {
+                return jsonResponse(res, 'error', 400, 'all fields are required');
             };
 
             // database post article query
@@ -70,6 +71,7 @@ const articleController = {
     async deleteArticle(req, res) {
         //  parameter (number)
         const id = parseInt(req.params.id);
+        
         try {
             // delete article query
             const remove = `DELETE FROM articles WHERE articleid=$1`;

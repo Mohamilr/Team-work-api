@@ -11,7 +11,9 @@ const gifController = {
     async postGif(req, res) {
         //  gif key (gif) form-data
         let image = req.files.gif;
-        const { gifTitle, gifAuthorId } = req.body;
+        const gifTitle = req.body;
+        const gifAuthorId = req.id;
+
         try {
                 // empty body values (form-data)
                 if (!image || !gifTitle || !gifAuthorId) {
@@ -47,6 +49,7 @@ const gifController = {
     async deleteGif(req, res) {
         // parameter (number)
         const id = parseInt(req.params.id);
+        
         try {
                 // delete gif query
                 const deleteGif = `DELETE FROM gifs WHERE gifId=$1`;

@@ -1,4 +1,5 @@
 import jwt from 'jsonwebtoken';
+import pool from '../models/database';
 //  token verification
     
 const verifyToken = async (req, res, next) => {
@@ -12,7 +13,13 @@ const verifyToken = async (req, res, next) => {
 
         const decoded = await jwt.verify(token, process.env.SECRET_KEY)
 
-        console.log(decoded)
+        const user = `SELECT * FROM employee WHERE email=$1`;
+        const value = [decoded.email];
+        const userQuery = await pool.query(user, value);
+
+        const id = userQuery.rows[0].authorid;
+
+        req.id = id;
 
         next();
     }
