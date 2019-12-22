@@ -18,8 +18,7 @@ describe('articles', () => {
                 .set('Authorization', `bearer wrong token`)
                 .send({
                     title: 'my first official project',
-                    article: 'i was an intern at Hotels.ng. i worked with different teams and was assigned to different projects. it was a great experience to be a part of HNG internship 6.',
-                    authorId: 1
+                    article: 'i was an intern at Hotels.ng. i worked with different teams and was assigned to different projects. it was a great experience to be a part of HNG internship 6.'
                 })
                 .end((err, res) => {
                     res.should.have.status(403);
@@ -36,8 +35,7 @@ describe('articles', () => {
                 .set('Authorization', `bearer ${process.env.TEST_TOKEN}`)
                 .send({
                     title: 'my first official project',
-                    article: '',
-                    authorId: 1
+                    article: ''
                 })
                 .end((err, res) => {
                     res.should.have.status(400);
@@ -53,8 +51,7 @@ describe('articles', () => {
                 .set('Authorization', `bearer ${process.env.TEST_TOKEN}`)
                 .send({
                     title: 'my first official project',
-                    article: 'i was an intern at Hotels.ng. i worked with different teams and was assigned to different projects. it was a great experience to be a part of HNG internship 6.',
-                    authorId: 1
+                    article: 'i was an intern at Hotels.ng. i worked with different teams and was assigned to different projects. it was a great experience to be a part of HNG internship 6.'
                 })
                 .end((err, res) => {
                     res.should.have.status(201);

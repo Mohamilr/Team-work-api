@@ -16,8 +16,7 @@ describe('articleMiddleware', () => {
             .set('Authorization', `bearer ${process.env.TEST_TOKEN}`)
             .send({
                 title: 'a ',
-                article: 'i was an intern at Hotels.ng. i worked with different teams and was assigned to different projects. it was a great experience to be a part of HNG internship 6.',
-                authorId: 1
+                article: 'i was an intern at Hotels.ng. i worked with different teams and was assigned to different projects. it was a great experience to be a part of HNG internship 6.'
             })
             .end((err, res) => {
                 res.should.have.status(400);
@@ -33,8 +32,7 @@ describe('articleMiddleware', () => {
             .set('Authorization', `bearer ${process.env.TEST_TOKEN}`)
             .send({
                 title: 'my first article',
-                article: 'i was an intern',
-                authorId: 1
+                article: 'i was an intern'
             })
             .end((err, res) => {
                 res.should.have.status(400);
@@ -50,8 +48,7 @@ describe('articleMiddleware', () => {
             .set('Authorization', `bearer ${process.env.TEST_TOKEN}`)
             .send({
                 title: 'a ',
-                article: 'i was an intern at Hotels.ng. i worked with different teams and was assigned to different projects. it was a great experience to be a part of HNG internship 6.',
-                authorId: 1
+                article: 'i was an intern at Hotels.ng. i worked with different teams and was assigned to different projects. it was a great experience to be a part of HNG internship 6.'
             })
             .end((err, res) => {
                 res.should.have.status(400);
@@ -67,8 +64,7 @@ describe('articleMiddleware', () => {
             .set('Authorization', `bearer ${process.env.TEST_TOKEN}`)
             .send({
                 title: 'my first article',
-                article: 'i was an intern',
-                authorId: 1
+                article: 'i was an intern'
             })
             .end((err, res) => {
                 res.should.have.status(400);

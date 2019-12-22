@@ -15,7 +15,6 @@ describe('create gif', () => {
             .set('Authorization', `bearer ${process.env.TEST_TOKEN}`)
             .attach('gif', path.join(__dirname, './test-images/image.jpg') , 'image.jpg')
             .field('gifTitle', 'my funny gif')
-            .field('gifAuthorId', 1)
             .end((err, res) => {
                 res.should.have.status(400);
                 res.body.should.be.a('object');

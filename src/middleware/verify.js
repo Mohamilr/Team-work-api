@@ -1,5 +1,6 @@
 import jwt from 'jsonwebtoken';
 import pool from '../models/database';
+import jsonResponse from '../helpers/jsonResponse';
 //  token verification
     
 const verifyToken = async (req, res, next) => {
@@ -24,10 +25,10 @@ const verifyToken = async (req, res, next) => {
         next();
     }
     catch (e) {
-        res.status(403).json({
+        jsonResponse(res, 'error', 403, {
             status: 'error',
             error: 'forbidden'
-        });
+        })
     }
 
 }

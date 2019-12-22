@@ -1,6 +1,11 @@
 import pool from '../models/database';
 import jsonResponse from '../helpers/jsonResponse';
 
+// query container
+let checkQuery,
+    sendQuery,
+    data;
+
 // article conrtroller
 const articleController = {
     async createArticle(req, res) {
@@ -15,18 +20,17 @@ const articleController = {
             };
 
             // database post article query
-            const create = `INSERT INTO articles (title, article, authorid, createdon)
-                                VALUES($1, $2, $3, $4) RETURNING *`;
-            const values = [title, article, authorId, new Date().toLocaleString()];
-            const createQuery = await pool.query(create, values);
+            sendQuery = await pool.query(`INSERT INTO articles (title, article, authorid, createdon)
+            VALUES($1, $2, $3, $4) RETURNING *`, [title, article, authorId, new Date().toLocaleString()]);
 
+            data = sendQuery.rows[0];
             // article post response
             return jsonResponse(res, 'success', 201, {
                 message: 'Article successfully posted',
-                articleId: createQuery.rows[0].articleid,
-                createdOn: createQuery.rows[0].createdon,
-                title: createQuery.rows[0].title,
-                article: createQuery.rows[0].article
+                articleId: data.articleid,
+                createdOn: data.createdon,
+                title: data.title,
+                article: data.article,
             })
         }
         catch (e) {
@@ -39,29 +43,27 @@ const articleController = {
 
         try {
             // select an article query
-            const check = `SELECT * FROM articles WHERE articleid=$1`;
-            const checkValue = [id];
-            const checkQuery = await pool.query(check, checkValue);
+            checkQuery = await pool.query(`SELECT * FROM articles WHERE articleid=$1`, [id]);
 
             if(!checkQuery.rowCount) {
                 return jsonResponse(res, 'error', 404, 'article not found')
             }
 
+            data = checkQuery.rows[0];
             // body values
-            const title = req.body.title || checkQuery.rows[0].title;
-            const article = req.body.article || checkQuery.rows[0].article;
+            const title = req.body.title || data.title;
+            const article = req.body.article || data.article;
 
             // update selected article query
-            const modify = `UPDATE articles SET title=$1, article=$2, createdon=$3 WHERE articleid=$4 RETURNING *`;
-            const value = [title, article, new Date().toLocaleString(), id];
-            const modifyQuery = await pool.query(modify, value)
+            sendQuery = await pool.query(`UPDATE articles SET title=$1, article=$2, createdon=$3 WHERE articleid=$4 RETURNING *`, [title, article, new Date().toLocaleString(), id])
 
+            data = sendQuery.rows[0];
             // update response
             return jsonResponse(res, 'success', 200, {
                 message: 'Article successfully updated',
                 title: title,
                 article: article,
-                modifiedOn: modifyQuery.rows[0].createdon
+                modifiedOn: data.createdon
             })
         }
         catch (e) {
@@ -74,12 +76,10 @@ const articleController = {
         
         try {
             // delete article query
-            const remove = `DELETE FROM articles WHERE articleid=$1`;
-            const value = [id];
-            const removeQuery = await pool.query(remove, value);
+            sendQuery = await pool.query(`DELETE FROM articles WHERE articleid=$1`, [id]);
             
             // if article id is not found
-            if(!removeQuery.rowCount) {
+            if(!sendQuery.rowCount) {
                 return jsonResponse(res, 'error', 404, 'article not found')
             }
 
