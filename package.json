@@ -1,0 +1,64 @@
+{
+  "name": "team-work-api",
+  "version": "1.0.0",
+  "description": "Teamwork is an internal social network for employees of an organization. The goal of this application is to facilitate more interaction between colleagues and promote team bonding.",
+  "main": "server.js",
+  "engines": {
+    "node": "10.16.x"
+  },
+  "scripts": {
+    "clean": "rm -rf build && mkdir build",
+    "build-babel": "babel -d ./build ./src -s",
+    "build": "npm run clean && npm run build-babel",
+    "start": "npm run build && node ./build/server.js",
+    "start-dev": "nodemon --exec babel-node src/server.js",
+    "test": "nyc mocha --require @babel/register --require @babel/polyfill src/test --exit",
+    "coverage": "nyc report --reporter=text-lcov | coveralls"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Mohamilr/Team-work-api.git"
+  },
+  "keywords": [
+    "employeee",
+    "colleague",
+    "admin",
+    "team"
+  ],
+  "author": "Mohammed Ibrahim",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Mohamilr/Team-work-api/issues"
+  },
+  "homepage": "https://github.com/Mohamilr/Team-work-api#readme",
+  "dependencies": {
+    "@babel/cli": "^7.6.4",
+    "@babel/core": "^7.6.4",
+    "@babel/node": "^7.6.3",
+    "@babel/polyfill": "^7.6.0",
+    "@babel/preset-env": "^7.6.3",
+    "@babel/plugin-transform-runtime": "^7.6.2",
+    "@babel/runtime": "^7.7.2",
+    "bcrypt": "^3.0.6",
+    "body-parser": "^1.19.0",
+    "cloudinary": "^1.16.0",
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "express-fileupload": "^1.1.6-alpha.6",
+    "jsonwebtoken": "^8.5.1",
+    "pg": "^7.12.1",
+    "swagger-ui-express": "^4.1.2"
+  },
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "chai-http": "^4.3.0",
+    "coveralls": "^3.0.7",
+    "eslint": "^6.6.0",
+    "eslint-config-airbnb-base": "^14.0.0",
+    "eslint-plugin-import": "^2.18.2",
+    "mocha": "^6.2.2",
+    "nodemon": "^1.19.4",
+    "nyc": "^14.1.1"
+  }
+}
