@@ -6,7 +6,7 @@ import app from '../server';
 chai.use(chaiHttp);
 chai.should();
 
-describe('articleMiddleware', () => {
+describe.skip('articleMiddleware', () => {
     describe('POST and PATCH', () => {
         const id = 1;
         // post

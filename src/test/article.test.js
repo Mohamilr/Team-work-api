@@ -9,7 +9,7 @@ import app from '../server';
 chai.use(chaiHttp);
 chai.should();
 
-describe('articles', () => {
+describe.skip('articles', () => {
     describe('create article', () => {
         // error om wrong token
         it('should give error on wrong token', (done) => {

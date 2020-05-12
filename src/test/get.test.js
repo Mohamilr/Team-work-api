@@ -6,7 +6,7 @@ import app from '../server';
 chai.use(chaiHttp);
 chai.should();
 
-describe('GET', () => {
+describe.skip('GET', () => {
     describe('GET feed', () => {
         // error on wrong token
         it('should give an error on wrong token', (done) => {

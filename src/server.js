@@ -42,14 +42,6 @@ app.use(fileUpload({
 }))
 
 
-// app router
-app.use('/api/v1/', userRouter);
-app.use('/api/v1/', articleRouter);
-app.use('/api/v1', gifRouter);
-app.use('/api/v1', getRouter);
-app.use('/api/v1/', commentRouter);
-
-
 // welcome route
 app.get('/', (req, res) => {
     res.status(200).json(({

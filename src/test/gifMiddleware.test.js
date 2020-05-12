@@ -7,7 +7,7 @@ import app from '../server';
 chai.use(chaiHttp);
 chai.should();
 
-describe('create gif', () => {
+describe.skip('create gif', () => {
     // 
     it('should give error if image is not .gif', (done) => {
         chai.request(app)
