@@ -8,7 +8,7 @@ import app from '../server';
 chai.use(chaiHttp);
 chai.should();
 
-describe('POST comment', () => {
+describe.skip('POST comment', () => {
     // test article comment
     describe('POST article comment', () => {
         const id = 7;
@@ -19,8 +19,7 @@ describe('POST comment', () => {
                 .post(`/api/v1/articles/${id}/comment`)
                 .set('Authorization', `bearer ${process.env.TEST_TOKEN}`)
                 .send({
-                    comment: '',
-                    authorId: 1
+                    comment: ''
                 })
                 .end((err, res) => {
                     res.should.have.status(400);

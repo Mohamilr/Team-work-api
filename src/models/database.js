@@ -5,17 +5,35 @@ dotenv.config();
 
 // connect to database
 const connection = {
-    database: process.env.DB_DATABASE,
-    user: process.env.DB_USER,
-    password: process.env.DB_PASSWORD,
-    host: process.env.DB_HOST,
-    port: process.env.DB_PORT
+    // test: {
+        database: process.env.DB_DATABASE,
+        user: process.env.DB_USER,
+        password: process.env.DB_PASSWORD,
+        host: process.env.DB_HOST,
+        port: process.env.DB_PORT
+    // },
+    // deployment: {
+        // database: process.env.DEPLOY_DATABASE,
+        // user: process.env.DEPLOY_USER,
+        // password: process.env.DEPLOY_PASSWORD,
+        // host: process.env.DEPLOY_HOST,
+        // port: process.env.DEPLOY_PORT
+    // }
 };
 
 // pool
-const pool = new pg.Pool(connection);
+let pool; 
 
-pool.on('connect', () => {})
+// if(process.env.NODE_ENV === 'development') {
+//     pool = new pg.Pool(connection.test);
+// }
+// else {
+//     pool = new pg.Pool(connection.deployment); 
+// }
+
+pool = new pg.Pool(connection);
+
+pool.on('connect', () => { })
 
 // user table
 const userTable = async () => {
@@ -53,11 +71,11 @@ const articleTable = async () => {
         FOREIGN KEY(authorId) REFERENCES employee(authorId)  ON DELETE CASCADE ON UPDATE CASCADE
     )`;
 
-    try{
+    try {
         await pool.query(articleTableQuery);
         console.log('article table created');
     }
-    catch(e) {
+    catch (e) {
         console.log(e)
     }
 };
@@ -75,11 +93,11 @@ const articleCommentTable = async () => {
         FOREIGN KEY(authorId) REFERENCES employee(authorId)
     )`;
 
-    try{
+    try {
         await pool.query(articleCommentTableQuery);
         console.log('article comment table created')
     }
-    catch(e) {
+    catch (e) {
         console.log(e)
     }
 };
@@ -96,11 +114,11 @@ const gifTable = async () => {
         FOREIGN KEY(gifAuthorId) REFERENCES employee(authorId) ON DELETE CASCADE ON UPDATE CASCADE
     )`;
 
-    try{
+    try {
         await pool.query(gifTableQuery)
         console.log('gif table created');
     }
-    catch(e) {
+    catch (e) {
         console.log(e)
     }
 };
@@ -118,11 +136,11 @@ const gifCommentTable = async () => {
         FOREIGN KEY(authorId) REFERENCES employee(authorId) 
     )`
 
-    try{
+    try {
         await pool.query(gifCommentTableQuery);
         console.log('gif comment table created')
     }
-    catch(e) {
+    catch (e) {
         console.log(e)
     }
 };

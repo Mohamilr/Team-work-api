@@ -16,5 +16,5 @@ describe('SERVER.js', () => {
                 res.body.should.be.a('object');
             })
         done();
-    })
+    });
 })

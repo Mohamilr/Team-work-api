@@ -7,7 +7,7 @@ import app from '../server';
 chai.use(chaiHttp);
 chai.should();
 
-describe('create gif', () => {
+describe.skip('create gif', () => {
     // 
     it('should give error if image is not .gif', (done) => {
         chai.request(app)
@@ -15,7 +15,6 @@ describe('create gif', () => {
             .set('Authorization', `bearer ${process.env.TEST_TOKEN}`)
             .attach('gif', path.join(__dirname, './test-images/image.jpg') , 'image.jpg')
             .field('gifTitle', 'my funny gif')
-            .field('gifAuthorId', 1)
             .end((err, res) => {
                 res.should.have.status(400);
                 res.body.should.be.a('object');
