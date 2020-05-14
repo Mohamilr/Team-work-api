@@ -22,13 +22,13 @@ const connection = {
 };
 
 // pool
-let pool; 
+let pool;
 
 // if(process.env.NODE_ENV === 'development') {
 //     pool = new pg.Pool(connection.test);
 // }
 // else {
-//     pool = new pg.Pool(connection.deployment); 
+//     pool = new pg.Pool(connection.deployment);
 // }
 
 pool = new pg.Pool(connection);
@@ -133,7 +133,7 @@ const gifCommentTable = async () => {
         authorId INT NOT NULL,
         gifId INT NOT NULL,
         FOREIGN KEY(gifId) REFERENCES gifs(gifId),
-        FOREIGN KEY(authorId) REFERENCES employee(authorId) 
+        FOREIGN KEY(authorId) REFERENCES employee(authorId)
     )`
 
     try {
@@ -158,17 +158,17 @@ const gifCommentTable = async () => {
 // }
 
 // user
-userTable();
-// article
-articleTable();
-// gif
-gifTable();
-// article comment
-articleCommentTable();
-// gif comment
-gifCommentTable();
+// userTable();
+// // article
+// articleTable();
+// // gif
+// gifTable();
+// // article comment
+// articleCommentTable();
+// // gif comment
+// gifCommentTable();
 // dropTable
 // dropTable();
 
 // export pool to controllers
-export default pool;
+// export default pool;
