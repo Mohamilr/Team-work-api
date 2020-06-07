@@ -5,39 +5,50 @@ dotenv.config();
 
 // connect to database
 const connection = {
-    // test: {
-        database: process.env.DB_DATABASE,
-        user: process.env.DB_USER,
-        password: process.env.DB_PASSWORD,
-        host: process.env.DB_HOST,
-        port: process.env.DB_PORT
-    // },
-    // deployment: {
-        // database: process.env.DEPLOY_DATABASE,
-        // user: process.env.DEPLOY_USER,
-        // password: process.env.DEPLOY_PASSWORD,
-        // host: process.env.DEPLOY_HOST,
-        // port: process.env.DEPLOY_PORT
-    // }
+  development: {
+    database: process.env.DB_DATABASE,
+    user: process.env.DB_USER,
+    password: process.env.DB_PASSWORD,
+    host: process.env.DB_HOST,
+    port: process.env.DB_PORT,
+  },
+  test: {
+    database: process.env.TEST_DATABASE,
+    user: process.env.TEST_USER,
+    password: process.env.TEST_PASSWORD,
+    host: process.env.TEST_HOST,
+    port: process.env.TEST_PORT,
+  },
+  deployment: {
+    database: process.env.DEPLOY_DATABASE,
+    user: process.env.DEPLOY_USER,
+    password: process.env.DEPLOY_PASSWORD,
+    host: process.env.DEPLOY_HOST,
+    port: process.env.DEPLOY_PORT,
+  },
 };
 
 // pool
-let pool; 
+let pool;
 
-// if(process.env.NODE_ENV === 'development') {
-//     pool = new pg.Pool(connection.test);
-// }
-// else {
-//     pool = new pg.Pool(connection.deployment); 
-// }
+if (process.env.NODE_ENV === 'development') {
+  pool = new pg.Pool(connection.development);
+  console.log('development');
+} else if (process.env.NODE_ENV === 'test') {
+  pool = new pg.Pool(connection.test);
+  console.log('test');
+} else {
+  pool = new pg.Pool(connection.deployment);
+  console.log('deployment');
+}
 
-pool = new pg.Pool(connection);
+// pool = new pg.Pool(connection);
 
-pool.on('connect', () => { })
+pool.on('connect', () => {});
 
 // user table
 const userTable = async () => {
-    const userTableQuery = `CREATE TABLE IF NOT EXISTS
+  const userTableQuery = `CREATE TABLE IF NOT EXISTS
     employee(
         authorId SERIAL PRIMARY KEY NOT NULL UNIQUE,
         firstName VARCHAR(50) NOT NULL,
@@ -50,18 +61,17 @@ const userTable = async () => {
         address VARCHAR(100) NOT NULL
     )`;
 
-    try {
-        await pool.query(userTableQuery);
-        console.log('employee table created')
-    }
-    catch (e) {
-        console.log(e)
-    }
+  try {
+    await pool.query(userTableQuery);
+    console.log('employee table created');
+  } catch (e) {
+    console.log(e);
+  }
 };
 
 // article table
 const articleTable = async () => {
-    const articleTableQuery = `CREATE TABLE IF NOT EXISTS
+  const articleTableQuery = `CREATE TABLE IF NOT EXISTS
     articles(
         articleId SERIAL PRIMARY KEY NOT NULL UNIQUE,
         title VARCHAR(100) NOT NULL,
@@ -71,18 +81,17 @@ const articleTable = async () => {
         FOREIGN KEY(authorId) REFERENCES employee(authorId)  ON DELETE CASCADE ON UPDATE CASCADE
     )`;
 
-    try {
-        await pool.query(articleTableQuery);
-        console.log('article table created');
-    }
-    catch (e) {
-        console.log(e)
-    }
+  try {
+    await pool.query(articleTableQuery);
+    console.log('article table created');
+  } catch (e) {
+    console.log(e);
+  }
 };
 
 // article comment table
 const articleCommentTable = async () => {
-    const articleCommentTableQuery = `CREATE TABLE IF NOT EXISTS
+  const articleCommentTableQuery = `CREATE TABLE IF NOT EXISTS
     article_comments(
         commentId SERIAL PRIMARY KEY NOT NULL UNIQUE,
         comment VARCHAR(300) NOT NULL,
@@ -93,18 +102,17 @@ const articleCommentTable = async () => {
         FOREIGN KEY(authorId) REFERENCES employee(authorId)
     )`;
 
-    try {
-        await pool.query(articleCommentTableQuery);
-        console.log('article comment table created')
-    }
-    catch (e) {
-        console.log(e)
-    }
+  try {
+    await pool.query(articleCommentTableQuery);
+    console.log('article comment table created');
+  } catch (e) {
+    console.log(e);
+  }
 };
 
 // gif table
 const gifTable = async () => {
-    const gifTableQuery = `CREATE TABLE IF NOT EXISTS
+  const gifTableQuery = `CREATE TABLE IF NOT EXISTS
     gifs(
         gifId SERIAL PRIMARY KEY NOT NULL UNIQUE,
         image VARCHAR(500) NOT NULL,
@@ -114,18 +122,17 @@ const gifTable = async () => {
         FOREIGN KEY(gifAuthorId) REFERENCES employee(authorId) ON DELETE CASCADE ON UPDATE CASCADE
     )`;
 
-    try {
-        await pool.query(gifTableQuery)
-        console.log('gif table created');
-    }
-    catch (e) {
-        console.log(e)
-    }
+  try {
+    await pool.query(gifTableQuery);
+    console.log('gif table created');
+  } catch (e) {
+    console.log(e);
+  }
 };
 
 // gif comment table
 const gifCommentTable = async () => {
-    const gifCommentTableQuery = `CREATE TABLE IF NOT EXISTS
+  const gifCommentTableQuery = `CREATE TABLE IF NOT EXISTS
     gif_comments(
         commentId SERIAL PRIMARY KEY NOT NULL UNIQUE,
         comment VARCHAR(300) NOT NULL,
@@ -134,15 +141,14 @@ const gifCommentTable = async () => {
         gifId INT NOT NULL,
         FOREIGN KEY(gifId) REFERENCES gifs(gifId),
         FOREIGN KEY(authorId) REFERENCES employee(authorId) 
-    )`
+    )`;
 
-    try {
-        await pool.query(gifCommentTableQuery);
-        console.log('gif comment table created')
-    }
-    catch (e) {
-        console.log(e)
-    }
+  try {
+    await pool.query(gifCommentTableQuery);
+    console.log('gif comment table created');
+  } catch (e) {
+    console.log(e);
+  }
 };
 
 // drop table

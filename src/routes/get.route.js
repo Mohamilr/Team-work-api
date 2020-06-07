@@ -2,7 +2,7 @@ import { Router } from 'express';
 import verify from '../middleware/verify';
 import get from '../controllers/get';
 
-// configure route 
+// configure route
 const getRouter = Router();
 
 getRouter.get('/feed', verify, get.getAllArticlesGif);

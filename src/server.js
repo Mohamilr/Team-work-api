@@ -14,7 +14,7 @@ import commentRouter from './routes/comment.route';
 
 // swagger documentation
 import apiDocs from '../swagger.json'
- 
+
 dotenv.config();
 
 // instantiate express
@@ -26,29 +26,29 @@ app.use(cors());
 const port = process.env.PORT || 3000;
 
 app.use((req, res, next) => {
-    res.header('Access-Control-Allow-Origin', '*');
-    res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
-    res.header('Access-Control-Allow-Headers', 'Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers,X-Access-Token,XKey,Authorization');
-  
-    next();
-})
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+  res.header('Access-Control-Allow-Headers',
+    'Access-Control-Allow-Headers, Origin,Accept, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers,X-Access-Token,XKey,Authorization');
+
+  next();
+});
 
 // configure bodyparser
-app.use(bodyParser.json({ extended : true }));
+app.use(bodyParser.json({ extended: true }));
 
 // configure file-upload
 app.use(fileUpload({
-    useTempFiles: true
-}))
-
+  useTempFiles: true
+}));
 
 // welcome route
 app.get('/', (req, res) => {
-    res.status(200).json(({
-        status: 'success',
-        message: 'welcome to the team work api'
-    }))
-})
+  res.status(200).json(({
+    status: 'success',
+    message: 'welcome to the team work api'
+  }));
+});
 
 // app router
 app.use('/api/v1/', userRouter);
@@ -68,9 +68,9 @@ app.use('*', (req, res) => {
     })
 })
 
-app.listen(port,() => {
-    console.log(`app is running on ${port}`)
-})
+app.listen(port, () => {
+  console.log(`app is running on port ${port}`)
+});
 
 // export app for test
 export default app;

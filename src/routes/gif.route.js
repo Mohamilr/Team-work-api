@@ -4,7 +4,7 @@ import gifController from '../controllers/gifs';
 
 import verify from '../middleware/verify';
 
-// import gif middleware 
+// import gif middleware
 import gifMiddleware from '../middleware/gif.middleware';
 
 // configure route

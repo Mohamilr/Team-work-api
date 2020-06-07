@@ -1,20 +1,19 @@
-import chai from 'chai';
-import chaiHttp from 'chai-http';
+import supertest from 'supertest';
 
 import app from '../server';
 
-chai.use(chaiHttp);
-chai.should();
+const request = supertest.agent(app);
 
 describe('SERVER.js', () => {
-    // welcome route
-    it('should visit welcome route', (done) => {
-        chai.request(app)
-            .get('/')
-            .end((err, res) => {
-                res.should.have.status(200);
-                res.body.should.be.a('object');
-            })
+  // welcome route
+  it('should visit welcome route', (done) => {
+    request
+      .get('/')
+      .expect(200)
+      .then((res) => {
+        expect(res.body).toHaveProperty('status', 'success');
+        expect(res.status).toEqual(200);
         done();
-    });
-})
+      });
+  });
+});
